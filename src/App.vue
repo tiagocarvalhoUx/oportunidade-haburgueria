@@ -2,6 +2,7 @@
 import { ref } from 'vue';
 import { MessageCircle } from 'lucide-vue-next';
 import AppHeader from './components/AppHeader.vue';
+import ScrollProgress from './components/ScrollProgress.vue';
 import HeroSection from './components/HeroSection.vue';
 import CategoryFilter from './components/CategoryFilter.vue';
 import CatalogSection from './components/CatalogSection.vue';
@@ -51,6 +52,7 @@ function handleFinishOrder(name: string) {
 
 <template>
   <div class="min-h-screen bg-coal text-ice overflow-x-hidden">
+    <ScrollProgress />
     <AppHeader
       :cart-item-count="count"
       @cart-click="cartOpen = true"
@@ -128,7 +130,7 @@ function handleFinishOrder(name: string) {
     <button
       @click="openGeneralWhatsApp"
       aria-label="WhatsApp"
-      class="fixed bottom-6 right-6 z-50 bg-green-600 hover:bg-green-500 text-white rounded-full p-4 shadow-2xl transition-all hover:scale-[1.02]"
+      class="fixed bottom-6 right-6 z-50 bg-green-600 hover:bg-green-500 text-white rounded-full p-4 shadow-2xl transition-all hover:scale-110 fab-glow"
     >
       <MessageCircle class="w-6 h-6" />
     </button>

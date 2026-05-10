@@ -2,14 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@font-face {
-  font-family: 'Onest';
-  src: url('/fonts/Onest-VariableFont_wght.ttf') format('truetype');
-  font-weight: 100 900;
-  font-style: normal;
-  font-display: swap;
-}
-
 /* Global Styles */
 * {
   margin: 0;
@@ -174,6 +166,40 @@ select:focus-visible {
 
   .no-print {
     display: none;
+  }
+}
+
+/* Image rendering for product photos */
+img {
+  -webkit-user-drag: none;
+  user-select: none;
+}
+
+/* Smoother scroll snap (when applied) */
+.snap-section {
+  scroll-snap-align: start;
+}
+
+/* Floating action button glow */
+@keyframes floatGlow {
+  0%, 100% { box-shadow: 0 8px 28px -8px rgba(22, 163, 74, 0.55); }
+  50% { box-shadow: 0 12px 40px -6px rgba(22, 163, 74, 0.85); }
+}
+.fab-glow {
+  animation: floatGlow 2.6s ease-in-out infinite;
+}
+
+/* Subtle in-view fade for scroll-triggered elements (progressive enhancement) */
+@media (prefers-reduced-motion: no-preference) {
+  .reveal {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 

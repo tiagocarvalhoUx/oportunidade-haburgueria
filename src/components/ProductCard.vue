@@ -1,6 +1,16 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue';
-import { Plus, MessageCircle, CheckCircle2, Clock, XCircle, Images, X, ChevronLeft, ChevronRight } from 'lucide-vue-next';
+import { computed, ref, onMounted, onUnmounted, watch } from 'vue';
+import {
+  Plus,
+  MessageCircle,
+  CheckCircle2,
+  Clock,
+  XCircle,
+  Images,
+  X,
+  ChevronLeft,
+  ChevronRight,
+} from 'lucide-vue-next';
 import type { Product } from '../types';
 import { openProductWhatsApp } from '../utils/whatsapp';
 
@@ -33,9 +43,11 @@ const priceText = computed(() =>
     : props.product.priceLabel || 'A consultar',
 );
 
-const gallery = computed(() => props.product.gallery && props.product.gallery.length > 0
-  ? props.product.gallery
-  : [props.product.image]);
+const gallery = computed(() =>
+  props.product.gallery && props.product.gallery.length > 0
+    ? props.product.gallery
+    : [props.product.image],
+);
 
 const galleryOpen = ref(false);
 const activeIdx = ref(0);
@@ -44,12 +56,82 @@ function openGallery(idx = 0) {
   activeIdx.value = idx;
   galleryOpen.value = true;
 }
+function close() {
+  galleryOpen.value = false;
+}
 function next() {
   activeIdx.value = (activeIdx.value + 1) % gallery.value.length;
 }
 function prev() {
   activeIdx.value = (activeIdx.value - 1 + gallery.value.length) % gallery.value.length;
 }
+
+// Cyclic offset relative to active, so left/right slots wrap around
+function relativeOffset(idx: number) {
+  const n = gallery.value.length;
+  let diff = idx - activeIdx.value;
+  if (diff > n / 2) diff -= n;
+  if (diff < -n / 2) diff += n;
+  return diff;
+}
+
+function itemStyle(idx: number) {
+  const offset = relativeOffset(idx);
+  const abs = Math.abs(offset);
+
+  // Hide far items entirely
+  if (abs > 3) {
+    return {
+      transform: `translateX(${offset > 0 ? 350 : -350}px) rotateY(${offset > 0 ? -55 : 55}deg) translateZ(-500px) scale(0.4)`,
+      opacity: 0,
+      pointerEvents: 'none' as const,
+      zIndex: 0,
+    };
+  }
+
+  const translateX = offset * 38; // %
+  const translateZ = -Math.min(abs, 3) * 140; // px backwards
+  const rotateY = offset === 0 ? 0 : offset > 0 ? -38 : 38; // tilt sides
+  const scale = 1 - abs * 0.08;
+  const opacity = abs === 0 ? 1 : abs === 1 ? 0.85 : abs === 2 ? 0.45 : 0.18;
+
+  return {
+    transform: `translateX(${translateX}%) translateZ(${translateZ}px) rotateY(${rotateY}deg) scale(${scale})`,
+    opacity,
+    zIndex: 100 - abs,
+  };
+}
+
+// Drag / swipe support
+const dragStartX = ref<number | null>(null);
+function onPointerDown(e: PointerEvent) {
+  dragStartX.value = e.clientX;
+}
+function onPointerUp(e: PointerEvent) {
+  if (dragStartX.value === null) return;
+  const dx = e.clientX - dragStartX.value;
+  if (Math.abs(dx) > 50) {
+    dx > 0 ? prev() : next();
+  }
+  dragStartX.value = null;
+}
+
+// Keyboard nav
+function onKey(e: KeyboardEvent) {
+  if (!galleryOpen.value) return;
+  if (e.key === 'ArrowRight') next();
+  else if (e.key === 'ArrowLeft') prev();
+  else if (e.key === 'Escape') close();
+}
+
+onMounted(() => window.addEventListener('keydown', onKey));
+onUnmounted(() => window.removeEventListener('keydown', onKey));
+
+// Lock body scroll while open
+watch(galleryOpen, (open) => {
+  if (typeof document === 'undefined') return;
+  document.body.style.overflow = open ? 'hidden' : '';
+});
 </script>
 
 <template>
@@ -59,11 +141,15 @@ function prev() {
       isUnavailable ? 'opacity-70' : '',
     ]"
   >
-    <div class="relative overflow-hidden h-52 bg-coal cursor-pointer" @click="openGallery(0)">
+    <div
+      class="relative overflow-hidden h-52 bg-coal cursor-zoom-in"
+      @click="openGallery(0)"
+    >
       <img
         :src="product.image"
         :alt="product.name"
         loading="lazy"
+        decoding="async"
         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
       />
 
@@ -150,33 +236,40 @@ function prev() {
     </div>
   </div>
 
-  <!-- Gallery Modal -->
+  <!-- Carousel 3D Modal -->
   <Teleport to="body">
     <Transition
-      enter-active-class="transition duration-200"
+      enter-active-class="transition duration-300"
       enter-from-class="opacity-0"
       enter-to-class="opacity-100"
-      leave-active-class="transition duration-150"
+      leave-active-class="transition duration-200"
       leave-from-class="opacity-100"
       leave-to-class="opacity-0"
     >
       <div
         v-if="galleryOpen"
-        class="fixed inset-0 z-[60] bg-black/90 backdrop-blur-sm flex items-center justify-center p-4"
-        @click.self="galleryOpen = false"
+        class="fixed inset-0 z-[60] flex items-center justify-center carousel-backdrop"
+        @click.self="close"
       >
         <button
-          @click="galleryOpen = false"
-          class="absolute top-4 right-4 text-white hover:text-cheese transition-colors p-2 bg-coal/60 rounded-full"
+          @click="close"
+          class="absolute top-5 right-5 text-white/80 hover:text-cheese transition-colors p-2.5 bg-coal/70 hover:bg-coal/90 rounded-full backdrop-blur z-30 ring-1 ring-white/10"
           aria-label="Fechar"
         >
           <X class="w-6 h-6" />
         </button>
 
+        <div class="absolute top-5 left-5 z-30 bg-coal/70 backdrop-blur rounded-full px-4 py-2 ring-1 ring-cheese/30">
+          <p class="text-white font-heading font-bold text-sm md:text-base leading-tight">
+            {{ product.name }}
+          </p>
+          <p class="text-cheese/80 text-xs">{{ activeIdx + 1 }} de {{ gallery.length }}</p>
+        </div>
+
         <button
           v-if="gallery.length > 1"
           @click="prev"
-          class="absolute left-4 md:left-8 text-white hover:text-cheese transition-colors p-3 bg-coal/60 rounded-full"
+          class="absolute left-3 md:left-8 z-30 text-white hover:text-cheese transition-all p-3 md:p-4 bg-coal/70 hover:bg-coal/90 rounded-full backdrop-blur ring-1 ring-white/10 hover:scale-110"
           aria-label="Anterior"
         >
           <ChevronLeft class="w-6 h-6" />
@@ -185,42 +278,110 @@ function prev() {
         <button
           v-if="gallery.length > 1"
           @click="next"
-          class="absolute right-4 md:right-8 text-white hover:text-cheese transition-colors p-3 bg-coal/60 rounded-full"
+          class="absolute right-3 md:right-8 z-30 text-white hover:text-cheese transition-all p-3 md:p-4 bg-coal/70 hover:bg-coal/90 rounded-full backdrop-blur ring-1 ring-white/10 hover:scale-110"
           aria-label="Próxima"
         >
           <ChevronRight class="w-6 h-6" />
         </button>
 
-        <div class="max-w-5xl w-full flex flex-col items-center gap-4">
-          <img
-            :src="gallery[activeIdx]"
-            :alt="`${product.name} — foto ${activeIdx + 1}`"
-            class="max-h-[75vh] w-auto rounded-xl shadow-2xl object-contain"
-          />
-          <div class="text-center">
-            <p class="text-white font-bold font-heading">{{ product.name }}</p>
-            <p class="text-white/60 text-sm">
-              {{ activeIdx + 1 }} / {{ gallery.length }}
-            </p>
+        <!-- 3D Stage -->
+        <div
+          class="carousel-stage select-none"
+          @pointerdown="onPointerDown"
+          @pointerup="onPointerUp"
+        >
+          <div
+            v-for="(img, idx) in gallery"
+            :key="idx"
+            class="carousel-item"
+            :style="itemStyle(idx)"
+            @click="activeIdx = idx"
+          >
+            <img
+              :src="img"
+              :alt="`${product.name} — foto ${idx + 1}`"
+              loading="lazy"
+              decoding="async"
+              draggable="false"
+            />
+            <div
+              v-if="idx !== activeIdx"
+              class="absolute inset-0 bg-coal/40 transition-opacity"
+            ></div>
           </div>
+        </div>
 
-          <div v-if="gallery.length > 1" class="flex gap-2 flex-wrap justify-center max-w-3xl">
-            <button
-              v-for="(img, idx) in gallery"
-              :key="idx"
-              @click="activeIdx = idx"
-              :class="[
-                'w-14 h-14 rounded-lg overflow-hidden border-2 transition-all',
-                idx === activeIdx
-                  ? 'border-cheese scale-105'
-                  : 'border-transparent opacity-60 hover:opacity-100',
-              ]"
-            >
-              <img :src="img" :alt="`thumb ${idx + 1}`" class="w-full h-full object-cover" />
-            </button>
-          </div>
+        <!-- Dots indicator -->
+        <div
+          v-if="gallery.length > 1"
+          class="absolute bottom-6 left-1/2 -translate-x-1/2 z-30 flex gap-2 bg-coal/70 backdrop-blur rounded-full px-4 py-2.5 ring-1 ring-white/10"
+        >
+          <button
+            v-for="(_, idx) in gallery"
+            :key="idx"
+            @click="activeIdx = idx"
+            :class="[
+              'h-2 rounded-full transition-all',
+              idx === activeIdx ? 'bg-cheese w-6' : 'bg-white/30 hover:bg-white/60 w-2',
+            ]"
+            :aria-label="`Ir para foto ${idx + 1}`"
+          ></button>
         </div>
       </div>
     </Transition>
   </Teleport>
 </template>
+
+<style scoped>
+.carousel-backdrop {
+  background: radial-gradient(ellipse at center, rgba(20, 20, 20, 0.85) 0%, rgba(0, 0, 0, 0.97) 100%);
+  backdrop-filter: blur(8px);
+}
+
+.carousel-stage {
+  position: relative;
+  width: min(90vw, 800px);
+  height: min(70vh, 560px);
+  perspective: 1600px;
+  perspective-origin: center center;
+  transform-style: preserve-3d;
+  cursor: grab;
+}
+
+.carousel-stage:active {
+  cursor: grabbing;
+}
+
+.carousel-item {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 100%;
+  height: 100%;
+  border-radius: 14px;
+  overflow: hidden;
+  transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+  transform-style: preserve-3d;
+  cursor: pointer;
+  box-shadow:
+    0 30px 70px -20px rgba(0, 0, 0, 0.7),
+    0 0 0 1px rgba(255, 214, 10, 0.08);
+  background: #0d0d0d;
+}
+
+.carousel-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .carousel-item {
+    transition: none;
+  }
+}
+</style>
