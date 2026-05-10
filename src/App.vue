@@ -1,0 +1,136 @@
+<script setup lang="ts">
+import { ref } from 'vue';
+import { MessageCircle } from 'lucide-vue-next';
+import AppHeader from './components/AppHeader.vue';
+import HeroSection from './components/HeroSection.vue';
+import CategoryFilter from './components/CategoryFilter.vue';
+import CatalogSection from './components/CatalogSection.vue';
+import PromotionsSection from './components/PromotionsSection.vue';
+import TrustNotices from './components/TrustNotices.vue';
+import AboutSection from './components/AboutSection.vue';
+import CartModal from './components/CartModal.vue';
+import AppFooter from './components/AppFooter.vue';
+
+import { useCart } from './composables/useCart';
+import { products, categories, testimonials, promotions } from './data/products';
+import type { Product, ProductCategory } from './types';
+import { openWhatsApp, generateBatchInterestMessage } from './utils/whatsapp';
+
+const activeCategory = ref<ProductCategory>('all');
+const cartOpen = ref(false);
+const { items, total, count, addToCart, removeFromCart, updateQuantity, clearCart } = useCart();
+
+function handleAddToList(product: Product) {
+  addToCart(product, 1);
+  cartOpen.value = true;
+}
+
+function scrollTo(id: string) {
+  document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+}
+
+function openGeneralWhatsApp() {
+  openWhatsApp(
+    'Olá! Vi a página de equipamentos da hamburgueria e gostaria de mais informações sobre os itens disponíveis.',
+  );
+}
+
+function openPackageWhatsApp() {
+  openWhatsApp(
+    'Olá! Tenho interesse em montar um pacote com vários equipamentos. Pode me enviar a lista atualizada com valores e condições para compra em conjunto?',
+  );
+}
+
+function handleFinishOrder(name: string) {
+  if (items.value.length === 0) return;
+  openWhatsApp(generateBatchInterestMessage(items.value, name));
+  clearCart();
+  cartOpen.value = false;
+}
+</script>
+
+<template>
+  <div class="min-h-screen bg-coal text-ice overflow-x-hidden">
+    <AppHeader
+      :cart-item-count="count"
+      @cart-click="cartOpen = true"
+      @whatsapp-click="openGeneralWhatsApp"
+    />
+
+    <main>
+      <HeroSection
+        @view-catalog="scrollTo('equipamentos')"
+        @whatsapp="openGeneralWhatsApp"
+      />
+
+      <section
+        class="sticky top-[68px] z-20 bg-coal/95 backdrop-blur-md border-b border-cheese/10 py-3"
+      >
+        <div class="max-w-7xl mx-auto px-4 overflow-x-auto">
+          <CategoryFilter
+            :categories="categories"
+            :active-category="activeCategory"
+            @change="(c) => (activeCategory = c)"
+          />
+        </div>
+      </section>
+
+      <CatalogSection
+        :products="products"
+        :active-category="activeCategory"
+        @add-to-list="handleAddToList"
+      />
+
+      <PromotionsSection
+        :promotions="promotions"
+        @whatsapp-package="openPackageWhatsApp"
+      />
+
+      <TrustNotices :testimonials="testimonials" />
+
+      <AboutSection />
+
+      <!-- CTA final -->
+      <section
+        id="contato"
+        class="py-20 bg-gradient-to-br from-coal via-burger-dark to-coal text-center px-4"
+      >
+        <h2 class="text-3xl md:text-5xl font-bold text-ice font-heading mb-4">
+          Equipamentos Comerciais com
+          <span class="text-cheese">Preço de Oportunidade</span>
+        </h2>
+        <p class="text-lg text-ice/70 max-w-2xl mx-auto mb-8">
+          Fale agora pelo WhatsApp, consulte disponibilidade e negocie direto com o vendedor.
+        </p>
+        <button
+          @click="openGeneralWhatsApp"
+          class="inline-flex items-center gap-2 bg-green-600 hover:bg-green-500 text-white px-8 py-4 rounded-lg font-bold text-lg transition-all hover:scale-[1.02]"
+        >
+          <MessageCircle class="w-5 h-5" />
+          Chamar no WhatsApp Agora
+        </button>
+      </section>
+
+      <AppFooter />
+    </main>
+
+    <CartModal
+      :open="cartOpen"
+      :items="items"
+      :total="total"
+      @close="cartOpen = false"
+      @remove="removeFromCart"
+      @update-quantity="updateQuantity"
+      @finish="handleFinishOrder"
+    />
+
+    <!-- Floating WhatsApp -->
+    <button
+      @click="openGeneralWhatsApp"
+      aria-label="WhatsApp"
+      class="fixed bottom-6 right-6 z-50 bg-green-600 hover:bg-green-500 text-white rounded-full p-4 shadow-2xl transition-all hover:scale-[1.02]"
+    >
+      <MessageCircle class="w-6 h-6" />
+    </button>
+  </div>
+</template>
