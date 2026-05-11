@@ -142,6 +142,49 @@ export const products: Product[] = [
     badge: 'NEGOCIÁVEL',
   },
   {
+    id: 'geladeira-consul',
+    name: 'Geladeira Consul',
+    description:
+      'Geladeira Consul em bom estado de uso, ideal para armazenamento de bebidas, insumos e ingredientes em lanchonete ou hamburgueria.',
+    price: 0,
+    priceLabel: 'A consultar',
+    category: 'refrigeracao',
+    image: '/equipamentos/geladeira-consul/foto-1.png',
+    gallery: [
+      '/equipamentos/geladeira-consul/foto-1.png',
+      '/equipamentos/geladeira-consul/foto-2.png',
+    ],
+    features: [
+      'Marca Consul',
+      'Boa capacidade de armazenamento',
+      'Ideal para bebidas e insumos',
+      'Em funcionamento',
+    ],
+    condition: 'Usada em bom estado',
+    status: 'disponivel',
+  },
+  {
+    id: 'bancada',
+    name: 'Bancada de Apoio',
+    description:
+      'Bancada de apoio para cozinha ou área de produção, oferecendo espaço extra para preparo, montagem de lanches e organização de utensílios.',
+    price: 0,
+    priceLabel: 'A consultar',
+    category: 'mobiliario',
+    image: '/equipamentos/bancada/foto-1.png',
+    gallery: [
+      '/equipamentos/bancada/foto-1.png',
+    ],
+    features: [
+      'Estrutura resistente',
+      'Espaço útil para preparo',
+      'Ideal para cozinha comercial',
+      'Pronta para uso',
+    ],
+    condition: 'Usada em bom estado',
+    status: 'disponivel',
+  },
+  {
     id: 'casinha-gas',
     name: 'Casinha de Gás (Abrigo para Botijão)',
     description:
