@@ -43,13 +43,13 @@ const filtered = computed(() => {
 </script>
 
 <template>
-  <section id="equipamentos" class="bg-coal py-20">
+  <section id="equipamentos" class="bg-coal py-24">
     <div class="max-w-7xl mx-auto px-4">
       <div class="text-center mb-12">
         <h2 class="text-4xl md:text-5xl font-bold text-ice font-heading mb-3">
           Catálogo de <span class="text-cheese">Equipamentos</span>
         </h2>
-        <p class="text-lg text-ice/70 max-w-2xl mx-auto">
+        <p class="text-lg text-white max-w-2xl mx-auto leading-relaxed">
           Equipamento pronto para uso. Consulte disponibilidade e negocie direto pelo WhatsApp.
         </p>
       </div>
@@ -81,7 +81,7 @@ const filtered = computed(() => {
 
       <TransitionGroup
         tag="div"
-        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7"
+        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
         enter-active-class="transition duration-300"
         enter-from-class="opacity-0 translate-y-4"
         enter-to-class="opacity-100 translate-y-0"

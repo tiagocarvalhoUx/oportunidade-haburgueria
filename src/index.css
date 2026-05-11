@@ -18,6 +18,7 @@ body {
   font-family: 'Onest', system-ui, sans-serif;
   background-color: #151718;
   color: #f4efe5;
+  font-size: 16px;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -35,7 +36,28 @@ h6 {
   letter-spacing: 0;
 }
 
-/* Buttons */
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg bg-whatsapp px-7 py-4 text-base font-extrabold text-burger-dark shadow-lg shadow-green-900/25 transition-all hover:bg-green-400 hover:shadow-xl hover:shadow-green-900/30 hover:scale-[1.02] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-whatsapp disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg border border-cheese/55 bg-cheese/10 px-6 py-3 text-base font-semibold text-white transition-all hover:bg-cheese/20 hover:border-cheese/80 hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-tertiary {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg border border-white/15 bg-white/5 px-5 py-2.5 text-sm font-semibold text-white transition-all hover:bg-white/10 hover:border-white/30;
+  }
+
+  .surface-card {
+    @apply rounded-lg border border-white/10 bg-surface-dark shadow-xl shadow-black/25 transition-all;
+  }
+
+  .feature-card {
+    @apply rounded-lg border border-cheese/10 bg-surface-light p-6 text-burger-dark shadow-xl shadow-black/20 transition-all hover:-translate-y-1 hover:shadow-2xl;
+  }
+}
+
 button {
   font-family: 'Onest', system-ui, sans-serif;
   cursor: pointer;
@@ -126,7 +148,7 @@ textarea::placeholder {
 
 /* Utility Classes */
 .section-padding {
-  @apply py-20;
+  @apply py-24;
 }
 
 .max-width-container {

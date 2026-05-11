@@ -19,22 +19,22 @@ const seals = [
     id="inicio"
     class="min-h-screen bg-gradient-to-b from-coal via-burger-dark to-coal pt-20 relative overflow-hidden"
   >
-    <div class="max-w-7xl mx-auto px-4 py-16 relative z-10">
+    <div class="max-w-7xl mx-auto px-4 py-20 relative z-10">
       <div class="grid md:grid-cols-2 gap-12 items-center">
         <div class="space-y-6 animate-slide-up">
           <div class="inline-flex items-center gap-2 bg-cheese/10 border border-cheese/30 px-4 py-2 rounded-full">
             <Tag class="w-4 h-4 text-cheese" />
-            <span class="text-cheese font-semibold text-sm">
+            <span class="text-white font-semibold text-sm">
               Liquidação total - preços de oportunidade
             </span>
           </div>
 
           <h1 class="text-4xl md:text-6xl font-bold text-ice leading-tight font-heading">
             Equipamentos de Hamburgueria à Venda com
-            <span class="text-cheese">Preços de Oportunidade</span>
+            <span class="text-white">Preços de Oportunidade</span>
           </h1>
 
-          <p class="text-lg text-ice/70 leading-relaxed">
+          <p class="text-lg md:text-xl text-white leading-relaxed max-w-2xl">
             Geladeira, freezer, chapa, balcão, fritadeira e diversos itens comerciais
             disponíveis para venda. Consulte valores e negocie direto pelo WhatsApp.
           </p>
@@ -43,23 +43,23 @@ const seals = [
             <div
               v-for="(seal, idx) in seals"
               :key="idx"
-              class="flex items-center gap-2 bg-burger-dark/65 border border-cheese/15 rounded-lg px-3 py-2"
+              class="flex items-center gap-2 bg-burger-dark/75 border border-white/10 rounded-lg px-4 py-3 shadow-lg shadow-black/15"
             >
               <component :is="seal.icon" class="w-4 h-4 text-cheese" />
-              <span class="text-ice/80 text-sm font-medium">{{ seal.label }}</span>
+              <span class="text-white text-sm font-semibold">{{ seal.label }}</span>
             </div>
           </div>
 
           <div class="flex flex-col sm:flex-row gap-3 pt-4">
             <button
               @click="$emit('viewCatalog')"
-              class="px-7 py-4 bg-cheese text-burger-dark rounded-lg font-bold text-base hover:bg-cheese/90 transition-all hover:scale-[1.02]"
+              class="btn-secondary"
             >
               Ver Equipamentos
             </button>
             <button
               @click="$emit('whatsapp')"
-              class="px-7 py-4 bg-green-600 text-white rounded-lg font-bold text-base hover:bg-green-500 transition-all hover:scale-[1.02]"
+              class="btn-primary"
             >
               Negociar pelo WhatsApp
             </button>
@@ -77,7 +77,7 @@ const seals = [
           >
             <div class="text-center">
               <div class="text-2xl font-bold text-cheese font-heading">12+</div>
-              <div class="text-xs text-ice/70">itens disponíveis</div>
+              <div class="text-sm text-white">itens disponíveis</div>
             </div>
           </div>
           <div
@@ -85,7 +85,7 @@ const seals = [
           >
             <div class="text-center">
               <div class="text-base font-bold text-fire">VENDA RÁPIDA</div>
-              <div class="text-xs text-ice/70">valores negociáveis</div>
+              <div class="text-sm text-white">valores negociáveis</div>
             </div>
           </div>
         </div>

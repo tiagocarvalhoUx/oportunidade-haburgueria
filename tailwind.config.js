@@ -10,6 +10,9 @@ export default {
         ice: '#f4efe5',
         fire: '#c8643d',
         'burger-dark': '#0b0d0e',
+        whatsapp: '#25D366',
+        'surface-dark': '#1d2021',
+        'surface-light': '#f8f3ea',
       },
       fontFamily: {
         sans: ['Onest', 'system-ui', 'sans-serif'],

@@ -137,7 +137,7 @@ watch(galleryOpen, (open) => {
 <template>
   <div
     :class="[
-      'bg-coal/80 rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-all group border border-cheese/10 hover:-translate-y-1 duration-300',
+      'surface-card overflow-hidden group hover:-translate-y-1 duration-300 hover:border-cheese/25',
       isUnavailable ? 'opacity-70' : '',
     ]"
   >
@@ -177,7 +177,7 @@ watch(galleryOpen, (open) => {
         </span>
         <span
           v-if="gallery.length > 1"
-          class="inline-flex items-center gap-1 bg-coal/90 backdrop-blur text-cheese px-2 py-1 rounded text-[11px] font-semibold border border-cheese/30"
+          class="inline-flex items-center gap-1 bg-coal/90 backdrop-blur text-white px-2 py-1 rounded text-[11px] font-semibold border border-cheese/30"
         >
           <Images class="w-3 h-3" />
           {{ gallery.length }} fotos
@@ -185,29 +185,29 @@ watch(galleryOpen, (open) => {
       </div>
     </div>
 
-    <div class="p-5 space-y-3">
+    <div class="p-6 space-y-4">
       <h3 class="text-lg font-bold text-ice font-heading line-clamp-2">
         {{ product.name }}
       </h3>
 
-      <p class="text-sm text-ice/70 line-clamp-2 leading-relaxed">
+      <p class="text-base text-white line-clamp-2 leading-relaxed">
         {{ product.description }}
       </p>
 
-      <ul class="space-y-1">
+      <ul class="space-y-2">
         <li
           v-for="(feature, idx) in product.features.slice(0, 3)"
           :key="idx"
-          class="text-xs text-ice/60 flex items-start gap-1.5"
+          class="text-sm text-ice/85 flex items-start gap-2 leading-snug"
         >
-          <span class="text-cheese mt-0.5">•</span>
+          <span class="text-white mt-0.5">•</span>
           <span>{{ feature }}</span>
         </li>
       </ul>
 
       <div class="flex items-end justify-between pt-1">
         <div>
-          <div class="text-xs text-ice/50 uppercase tracking-wide">Valor</div>
+          <div class="text-sm text-white uppercase tracking-wide">Valor</div>
           <div class="text-2xl font-bold text-cheese font-heading">{{ priceText }}</div>
         </div>
         <div v-if="product.originalPrice" class="text-sm text-ice/50 line-through">
@@ -215,11 +215,11 @@ watch(galleryOpen, (open) => {
         </div>
       </div>
 
-      <div class="grid grid-cols-2 gap-2 pt-2">
+      <div class="grid grid-cols-[0.95fr_1.15fr] gap-3 pt-3">
         <button
           @click="$emit('addToList', product)"
           :disabled="isUnavailable"
-          class="bg-cheese/15 text-cheese border border-cheese/40 font-semibold py-2 rounded-lg hover:bg-cheese/25 transition-all text-sm flex items-center justify-center gap-1.5 disabled:opacity-50 disabled:cursor-not-allowed hover:scale-[1.02]"
+          class="btn-secondary px-3 py-2.5 text-sm"
         >
           <Plus class="w-4 h-4" />
           Tenho Interesse
@@ -227,7 +227,7 @@ watch(galleryOpen, (open) => {
         <button
           @click="openProductWhatsApp(product)"
           :disabled="isUnavailable"
-          class="bg-green-600 text-white font-semibold py-2 rounded-lg hover:bg-green-500 transition-all text-sm flex items-center justify-center gap-1.5 disabled:opacity-50 disabled:cursor-not-allowed hover:scale-[1.02]"
+          class="btn-primary px-4 py-3 text-base"
         >
           <MessageCircle class="w-4 h-4" />
           WhatsApp

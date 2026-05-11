@@ -34,13 +34,13 @@ const cards = [
 </script>
 
 <template>
-  <section id="sobre" class="bg-burger-dark py-20 relative overflow-hidden">
+  <section id="sobre" class="bg-burger-dark py-24 relative overflow-hidden">
     <div class="max-w-7xl mx-auto px-4 relative z-10">
       <div class="text-center mb-14">
         <h2 class="text-4xl md:text-5xl font-bold text-ice font-heading mb-4">
           Por que comprar <span class="text-cheese">aqui?</span>
         </h2>
-        <p class="text-lg text-ice/70 max-w-3xl mx-auto leading-relaxed">
+        <p class="text-lg text-white max-w-3xl mx-auto leading-relaxed">
           Liquidação completa de uma hamburgueria. Equipamentos comerciais selecionados, com
           preço abaixo do mercado, prontos para começar uma operação ou ampliar a sua. Monte
           sua estrutura comercial gastando menos.
@@ -51,17 +51,17 @@ const cards = [
         <div
           v-for="(card, idx) in cards"
           :key="idx"
-          class="bg-coal/60 border border-cheese/20 rounded-lg p-6 text-center group hover:border-cheese/50 transition-all hover:-translate-y-1"
+          class="feature-card text-center group"
         >
           <div class="flex justify-center mb-5">
             <div
-              class="p-3.5 bg-cheese/10 rounded-full group-hover:bg-cheese/20 transition-colors"
+              class="p-3.5 bg-cheese/15 rounded-full group-hover:bg-cheese/25 transition-colors"
             >
               <component :is="card.icon" :class="['w-7 h-7', card.color]" />
             </div>
           </div>
-          <h4 class="text-lg font-bold text-ice font-heading mb-2">{{ card.title }}</h4>
-          <p class="text-sm text-ice/70 leading-relaxed">{{ card.description }}</p>
+          <h4 class="text-lg font-bold text-burger-dark font-heading mb-3">{{ card.title }}</h4>
+          <p class="text-base text-coal leading-relaxed">{{ card.description }}</p>
         </div>
       </div>
     </div>

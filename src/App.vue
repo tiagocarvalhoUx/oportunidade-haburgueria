@@ -95,18 +95,18 @@ function handleFinishOrder(name: string) {
       <!-- CTA final -->
       <section
         id="contato"
-        class="py-20 bg-gradient-to-br from-coal via-burger-dark to-coal text-center px-4"
+        class="py-24 bg-gradient-to-br from-coal via-burger-dark to-coal text-center px-4"
       >
         <h2 class="text-3xl md:text-5xl font-bold text-ice font-heading mb-4">
           Equipamentos Comerciais com
-          <span class="text-cheese">Preço de Oportunidade</span>
+          <span class="text-white">Preço de Oportunidade</span>
         </h2>
-        <p class="text-lg text-ice/70 max-w-2xl mx-auto mb-8">
+        <p class="text-lg text-white max-w-2xl mx-auto mb-8 leading-relaxed">
           Fale agora pelo WhatsApp, consulte disponibilidade e negocie direto com o vendedor.
         </p>
         <button
           @click="openGeneralWhatsApp"
-          class="inline-flex items-center gap-2 bg-green-600 hover:bg-green-500 text-white px-8 py-4 rounded-lg font-bold text-lg transition-all hover:scale-[1.02]"
+          class="btn-primary text-lg"
         >
           <MessageCircle class="w-5 h-5" />
           Chamar no WhatsApp Agora
@@ -130,7 +130,7 @@ function handleFinishOrder(name: string) {
     <button
       @click="openGeneralWhatsApp"
       aria-label="WhatsApp"
-      class="fixed bottom-6 right-6 z-50 bg-green-600 hover:bg-green-500 text-white rounded-full p-4 shadow-2xl transition-all hover:scale-110 fab-glow"
+      class="fixed bottom-6 right-6 z-50 bg-whatsapp hover:bg-green-400 text-burger-dark rounded-full p-4 shadow-2xl transition-all hover:scale-110 fab-glow"
     >
       <MessageCircle class="w-6 h-6" />
     </button>

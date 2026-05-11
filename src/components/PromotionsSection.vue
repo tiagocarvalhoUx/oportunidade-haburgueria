@@ -32,14 +32,14 @@ const STEPS = [
 <template>
   <section
     id="promocoes"
-    class="py-20 bg-gradient-to-b from-coal to-burger-dark relative overflow-hidden"
+    class="py-24 bg-gradient-to-b from-coal to-burger-dark relative overflow-hidden"
   >
     <div class="max-w-7xl mx-auto px-4 relative z-10">
       <div class="text-center mb-14">
         <h2 class="text-4xl md:text-5xl font-bold text-ice font-heading mb-3">
           Condições <span class="text-fire">Especiais</span>
         </h2>
-        <p class="text-lg text-ice/70 max-w-2xl mx-auto">
+        <p class="text-lg text-white max-w-2xl mx-auto leading-relaxed">
           Quem leva mais de um item, fecha melhor. Consulte negociação direto pelo WhatsApp.
         </p>
       </div>
@@ -48,7 +48,7 @@ const STEPS = [
         <div
           v-for="promo in promotions"
           :key="promo.id"
-          class="bg-coal/60 border border-cheese/20 rounded-lg p-6 transition-all hover:-translate-y-1 hover:border-cheese/40"
+          class="surface-card p-6 hover:-translate-y-1 hover:border-cheese/35"
         >
           <div
             class="inline-flex items-center gap-2 bg-fire/15 border border-fire/30 rounded-full px-3 py-1 mb-4"
@@ -58,7 +58,7 @@ const STEPS = [
             </span>
           </div>
           <h3 class="text-xl font-bold text-ice font-heading mb-2">{{ promo.title }}</h3>
-          <p class="text-ice/70 text-sm leading-relaxed">{{ promo.description }}</p>
+          <p class="text-white text-base leading-relaxed">{{ promo.description }}</p>
         </div>
       </div>
 
@@ -82,7 +82,7 @@ const STEPS = [
           </p>
           <button
             @click="$emit('whatsappPackage')"
-            class="bg-coal text-cheese px-7 py-3 rounded-lg font-bold hover:bg-coal/90 transition-all inline-flex items-center gap-2 hover:scale-[1.02]"
+            class="btn-primary"
           >
             <MessageCircle class="w-4 h-4" />
             Negociar Pacote pelo WhatsApp
@@ -92,13 +92,13 @@ const STEPS = [
     </div>
   </section>
 
-  <section id="como-comprar" class="py-20 bg-coal">
+  <section id="como-comprar" class="py-24 bg-coal">
     <div class="max-w-7xl mx-auto px-4">
       <div class="text-center mb-14">
         <h2 class="text-4xl md:text-5xl font-bold text-ice font-heading mb-3">
           Como <span class="text-cheese">Comprar</span>
         </h2>
-        <p class="text-lg text-ice/70 max-w-2xl mx-auto">
+        <p class="text-lg text-white max-w-2xl mx-auto leading-relaxed">
           Processo simples e direto. Sem intermediários, sem burocracia.
         </p>
       </div>
@@ -107,7 +107,7 @@ const STEPS = [
         <div
           v-for="(step, idx) in STEPS"
           :key="idx"
-          class="bg-coal/60 border border-cheese/20 rounded-lg p-6 relative"
+          class="feature-card relative"
         >
           <div
             class="absolute -top-4 -left-4 bg-cheese text-burger-dark w-9 h-9 rounded-full flex items-center justify-center font-bold text-sm shadow-lg"
@@ -115,8 +115,8 @@ const STEPS = [
             {{ idx + 1 }}
           </div>
           <component :is="step.icon" class="w-7 h-7 text-cheese mb-4" />
-          <h4 class="text-lg font-bold text-ice font-heading mb-2">{{ step.title }}</h4>
-          <p class="text-sm text-ice/70 leading-relaxed">{{ step.description }}</p>
+          <h4 class="text-lg font-bold text-burger-dark font-heading mb-3">{{ step.title }}</h4>
+          <p class="text-base text-coal leading-relaxed">{{ step.description }}</p>
         </div>
       </div>
     </div>
