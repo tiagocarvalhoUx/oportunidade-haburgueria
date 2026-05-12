@@ -1,4 +1,4 @@
-const CACHE_NAME = 'liquidacao-hamburgueria-v1';
+const CACHE_NAME = 'liquidacao-hamburgueria-v2';
 
 const APP_SHELL = [
   '/',

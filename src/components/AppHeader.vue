@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import { Menu, X, ListChecks, MessageCircle } from 'lucide-vue-next';
+import { Menu, X, ListChecks, MessageCircle, Store } from 'lucide-vue-next';
 
 defineProps<{ cartItemCount: number }>();
 const emit = defineEmits<{
@@ -28,13 +28,17 @@ function scrollTo(id: string) {
     class="fixed top-0 left-0 right-0 bg-coal/95 backdrop-blur text-ice shadow-lg z-40 border-b border-cheese/10"
   >
     <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
-      <div class="flex items-center gap-2">
-        <div class="text-2xl">🏷️</div>
+      <div class="flex items-center gap-3">
+        <div
+          class="grid h-10 w-10 place-items-center rounded-lg bg-cheese/15 text-cheese ring-1 ring-cheese/25"
+        >
+          <Store class="h-5 w-5" />
+        </div>
         <div>
           <h1 class="text-base md:text-lg font-bold text-ice font-heading leading-tight">
-            Liquidação Hamburgueria
+            Liquidação de Hamburgueria
           </h1>
-          <p class="text-[10px] md:text-[11px] text-cheese tracking-wide">
+          <p class="text-[10px] md:text-[11px] text-white/85 tracking-wide">
             Equipamentos e móveis comerciais
           </p>
         </div>
@@ -45,7 +49,7 @@ function scrollTo(id: string) {
           v-for="item in NAV"
           :key="item.id"
           @click="scrollTo(item.id)"
-          class="text-ice/80 hover:text-cheese transition-colors font-medium text-sm"
+          class="text-ice/80 hover:text-white transition-colors font-medium text-sm"
         >
           {{ item.label }}
         </button>
@@ -68,10 +72,10 @@ function scrollTo(id: string) {
 
         <button
           @click="emit('whatsappClick')"
-          class="hidden md:flex items-center gap-2 bg-green-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-green-500 transition-all hover:scale-[1.02]"
+          class="btn-primary hidden px-5 py-2.5 text-sm md:flex"
         >
           <MessageCircle class="w-4 h-4" />
-          Chamar no WhatsApp
+          Negociar no WhatsApp
         </button>
 
         <button
@@ -101,15 +105,15 @@ function scrollTo(id: string) {
             v-for="item in NAV"
             :key="item.id"
             @click="scrollTo(item.id)"
-            class="block w-full text-left py-2 text-ice hover:text-cheese transition-colors"
+            class="block w-full text-left py-2 text-ice hover:text-white transition-colors"
           >
             {{ item.label }}
           </button>
           <button
             @click="emit('whatsappClick')"
-            class="w-full bg-green-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-green-500 transition-all mt-2"
+            class="btn-primary mt-2 w-full px-4 py-3"
           >
-            Chamar no WhatsApp
+            Negociar no WhatsApp
           </button>
         </div>
       </div>

@@ -25,7 +25,7 @@ export function generateBatchInterestMessage(items: CartItem[], customerName?: s
       const price = item.product.price > 0
         ? `R$ ${(item.product.price * item.quantity).toFixed(2)}`
         : item.product.priceLabel || 'A consultar';
-      return `• ${item.quantity}x ${item.product.name} — ${price} (${item.product.condition})`;
+      return `• ${item.quantity}x ${item.product.name} - ${price} (${item.product.condition})`;
     })
     .join('\n');
 
@@ -58,3 +58,4 @@ export function openProductWhatsApp(product: Product): void {
 export function openGenericWhatsApp(text: string): void {
   openWhatsApp(text);
 }
+

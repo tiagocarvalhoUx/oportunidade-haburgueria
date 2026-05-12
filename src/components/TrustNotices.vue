@@ -27,7 +27,7 @@ const TRUST_NOTES = [
           </span>
         </div>
         <h2 class="text-4xl md:text-5xl font-bold text-ice font-heading mb-3">
-          Avisos <span class="text-cheese">Importantes</span>
+          Avisos <span class="text-cheese">importantes</span>
         </h2>
         <p class="text-lg text-white max-w-2xl mx-auto leading-relaxed">
           Transparência em primeiro lugar. Leia antes de fechar negócio.
@@ -67,3 +67,4 @@ const TRUST_NOTES = [
     </div>
   </section>
 </template>
+

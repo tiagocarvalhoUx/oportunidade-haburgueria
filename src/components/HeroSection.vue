@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ArrowDown, Tag, Truck, ShieldCheck, Handshake } from 'lucide-vue-next';
+import { ArrowDown, Tag, Truck, ShieldCheck, Handshake, MessageCircle } from 'lucide-vue-next';
 
 defineEmits<{
   (e: 'viewCatalog'): void;
@@ -25,18 +25,18 @@ const seals = [
           <div class="inline-flex items-center gap-2 bg-cheese/10 border border-cheese/30 px-4 py-2 rounded-full">
             <Tag class="w-4 h-4 text-cheese" />
             <span class="text-white font-semibold text-sm">
-              Liquidação total - preços de oportunidade
+              Liquidação total com preços de oportunidade
             </span>
           </div>
 
           <h1 class="text-4xl md:text-6xl font-bold text-ice leading-tight font-heading">
-            Equipamentos de Hamburgueria à Venda com
-            <span class="text-white">Preços de Oportunidade</span>
+            Equipamentos de hamburgueria à venda com
+            <span class="text-white">negociação direta</span>
           </h1>
 
           <p class="text-lg md:text-xl text-white leading-relaxed max-w-2xl">
-            Geladeira, freezer, chapa, balcão, fritadeira e diversos itens comerciais
-            disponíveis para venda. Consulte valores e negocie direto pelo WhatsApp.
+            Geladeira, freezer, chapa, balcão, fritadeira e outros itens comerciais prontos
+            para uso. Consulte valores, fotos e disponibilidade direto pelo WhatsApp.
           </p>
 
           <div class="grid grid-cols-2 gap-3 pt-2">
@@ -52,16 +52,17 @@ const seals = [
 
           <div class="flex flex-col sm:flex-row gap-3 pt-4">
             <button
-              @click="$emit('viewCatalog')"
-              class="btn-secondary"
-            >
-              Ver Equipamentos
-            </button>
-            <button
               @click="$emit('whatsapp')"
               class="btn-primary"
             >
-              Negociar pelo WhatsApp
+              <MessageCircle class="w-5 h-5" />
+              Ver preço no WhatsApp
+            </button>
+            <button
+              @click="$emit('viewCatalog')"
+              class="btn-secondary"
+            >
+              Ver equipamentos
             </button>
           </div>
         </div>

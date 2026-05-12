@@ -35,7 +35,7 @@ const svg = `
   <g transform="translate(72,90)">
     <rect width="280" height="46" rx="23" fill="rgba(255,214,10,0.12)" stroke="#ffd60a" stroke-width="1.5"/>
     <text x="24" y="30" font-family="Poppins, Inter, sans-serif" font-size="18" font-weight="700" fill="#ffd60a" letter-spacing="1.5">
-      LIQUIDAÇÃO TOTAL
+      LIQUIDA��O TOTAL
     </text>
     <circle cx="252" cy="23" r="6" fill="#ff8c42"/>
   </g>
@@ -45,29 +45,29 @@ const svg = `
     Equipamentos de
   </text>
   <text x="72" y="320" font-family="Poppins, Inter, sans-serif" font-size="74" font-weight="800" fill="url(#accent)" filter="url(#shadow)">
-    Hamburgueria à Venda
+    Hamburgueria � Venda
   </text>
 
   <!-- Sub -->
   <text x="72" y="380" font-family="Inter, sans-serif" font-size="26" font-weight="500" fill="#e9ecef">
-    Chapa, fritadeira, estufa, pia inox, balcão e mais.
+    Chapa, fritadeira, estufa, pia inox, balc�o e mais.
   </text>
   <text x="72" y="416" font-family="Inter, sans-serif" font-size="26" font-weight="500" fill="#e9ecef">
-    Preços de oportunidade. Negocie pelo WhatsApp.
+    Pre�os de oportunidade. Negocie pelo WhatsApp.
   </text>
 
   <!-- CTA pill -->
   <g transform="translate(72,470)" filter="url(#shadow)">
     <rect width="320" height="68" rx="14" fill="#16a34a"/>
     <text x="160" y="44" font-family="Poppins, Inter, sans-serif" font-size="22" font-weight="700" fill="#ffffff" text-anchor="middle">
-      💬  Chamar no WhatsApp
+      ??  Chamar no WhatsApp
     </text>
   </g>
 
   <!-- Brand mark bottom-right -->
   <g transform="translate(${W - 72 - 360},${H - 72 - 64})">
     <rect width="360" height="64" rx="12" fill="rgba(13,13,13,0.6)" stroke="rgba(255,214,10,0.3)" stroke-width="1"/>
-    <text x="22" y="32" font-family="Inter, sans-serif" font-size="13" font-weight="600" fill="#ffd60a" letter-spacing="1.5">LIQUIDAÇÃO HAMBURGUERIA</text>
+    <text x="22" y="32" font-family="Inter, sans-serif" font-size="13" font-weight="600" fill="#ffd60a" letter-spacing="1.5">LIQUIDA��O HAMBURGUERIA</text>
     <text x="22" y="52" font-family="Inter, sans-serif" font-size="13" font-weight="500" fill="#f8f9fa" opacity="0.75">
       Equipamentos comerciais usados/seminovos
     </text>
@@ -81,7 +81,7 @@ const svg = `
 </svg>
 `;
 
-console.log('Generating og-image.jpg (1200×630)...');
+console.log('Generating og-image.jpg (1200�630)...');
 
 const base = sharp(SOURCE).rotate().resize(W, H, { fit: 'cover' }).blur(2);
 const composed = await base
@@ -90,7 +90,7 @@ const composed = await base
   .toBuffer();
 
 await writeFile(OUT_OG, composed);
-console.log(`✓ ${OUT_OG} (${(composed.length / 1024).toFixed(0)} KB)`);
+console.log(`? ${OUT_OG} (${(composed.length / 1024).toFixed(0)} KB)`);
 
 // Favicon SVG (price tag emoji style with cheese yellow)
 const favicon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
@@ -105,4 +105,4 @@ const favicon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
   <circle cx="22" cy="22" r="4" fill="#0d0d0d"/>
 </svg>`;
 await writeFile(OUT_FAVICON, favicon);
-console.log(`✓ ${OUT_FAVICON}`);
+console.log(`? ${OUT_FAVICON}`);

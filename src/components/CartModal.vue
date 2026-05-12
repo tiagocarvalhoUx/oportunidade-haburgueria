@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import { X, Plus, Minus, MessageCircle, Trash2 } from 'lucide-vue-next';
+import { X, Plus, Minus, MessageCircle, Trash2, ListChecks } from 'lucide-vue-next';
 import type { CartItem } from '../types';
 
 defineProps<{
@@ -53,8 +53,8 @@ function priceText(price: number, label?: string) {
     >
       <div class="bg-gradient-to-r from-cheese to-fire p-5 text-burger-dark flex items-center justify-between">
         <div>
-          <h2 class="text-xl font-bold font-heading">Lista de Interesse</h2>
-          <p class="text-xs opacity-80">Solicite negociação em pacote pelo WhatsApp</p>
+          <h2 class="text-xl font-bold font-heading">Lista de interesse</h2>
+          <p class="text-sm opacity-80">Monte um pacote e negocie direto pelo WhatsApp</p>
         </div>
         <button
           @click="emit('close')"
@@ -70,10 +70,10 @@ function priceText(price: number, label?: string) {
           v-if="items.length === 0"
           class="flex flex-col items-center justify-center h-full text-center"
         >
-          <div class="text-5xl mb-4">📋</div>
-          <p class="text-ice/70 font-semibold">Sua lista está vazia</p>
-          <p class="text-ice/50 text-sm mt-1">
-            Clique em "Tenho Interesse" nos equipamentos para adicionar.
+          <ListChecks class="w-12 h-12 text-white/50 mb-4" />
+          <p class="text-white font-semibold">Sua lista está vazia</p>
+          <p class="text-white/70 text-sm mt-1">
+            Clique em "Separar item" nos equipamentos que você quer negociar.
           </p>
         </div>
 
@@ -157,19 +157,20 @@ function priceText(price: number, label?: string) {
 
         <button
           @click="emit('finish', customerName)"
-          class="w-full bg-green-600 hover:bg-green-500 text-white font-bold py-3 rounded-lg transition-all flex items-center justify-center gap-2 hover:scale-[1.02]"
+          class="btn-primary w-full py-3"
         >
           <MessageCircle class="w-5 h-5" />
-          Enviar Lista pelo WhatsApp
+          Enviar lista no WhatsApp
         </button>
 
         <button
           @click="emit('close')"
-          class="w-full bg-burger-dark/70 text-ice font-semibold py-2 rounded-lg hover:bg-burger-dark transition-colors border border-cheese/20 text-sm"
+          class="btn-secondary w-full py-2.5 text-sm"
         >
-          Continuar Olhando
+          Continuar olhando
         </button>
       </div>
     </aside>
   </Transition>
 </template>
+

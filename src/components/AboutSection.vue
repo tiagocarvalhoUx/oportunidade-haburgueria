@@ -6,7 +6,7 @@ const cards = [
     icon: Tag,
     title: 'Preços de Oportunidade',
     description:
-      'Equipamentos comerciais com valores abaixo do custo de novos. Pronto para uso, sem perder qualidade.',
+      'Equipamentos comerciais com valores abaixo do custo de novos. Prontos para uso, sem perder qualidade.',
     color: 'text-cheese',
   },
   {
@@ -27,7 +27,7 @@ const cards = [
     icon: MessageSquare,
     title: 'Consulta pelo WhatsApp',
     description:
-      'Fale direto para tirar dúvidas, pedir fotos e combinar a retirada do equipamento.',
+      'Tire dúvidas, peça fotos e combine a retirada diretamente com o vendedor.',
     color: 'text-fire',
   },
 ];
@@ -38,7 +38,7 @@ const cards = [
     <div class="max-w-7xl mx-auto px-4 relative z-10">
       <div class="text-center mb-14">
         <h2 class="text-4xl md:text-5xl font-bold text-ice font-heading mb-4">
-          Por que comprar <span class="text-cheese">aqui?</span>
+          Por que vale <span class="text-cheese">comprar aqui?</span>
         </h2>
         <p class="text-lg text-white max-w-3xl mx-auto leading-relaxed">
           Liquidação completa de uma hamburgueria. Equipamentos comerciais selecionados, com
@@ -67,3 +67,4 @@ const cards = [
     </div>
   </section>
 </template>
+

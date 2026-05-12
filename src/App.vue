@@ -32,7 +32,7 @@ function scrollTo(id: string) {
 
 function openGeneralWhatsApp() {
   openWhatsApp(
-    'Olá! Vi a página de equipamentos da hamburgueria e gostaria de mais informações sobre os itens disponíveis.',
+    'Olá! Vi a página de equipamentos da hamburgueria e gostaria de consultar disponibilidade, fotos e valores.',
   );
 }
 
@@ -98,8 +98,8 @@ function handleFinishOrder(name: string) {
         class="py-24 bg-gradient-to-br from-coal via-burger-dark to-coal text-center px-4"
       >
         <h2 class="text-3xl md:text-5xl font-bold text-ice font-heading mb-4">
-          Equipamentos Comerciais com
-          <span class="text-white">Preço de Oportunidade</span>
+          Equipamentos comerciais com
+          <span class="text-white">preço de oportunidade</span>
         </h2>
         <p class="text-lg text-white max-w-2xl mx-auto mb-8 leading-relaxed">
           Fale agora pelo WhatsApp, consulte disponibilidade e negocie direto com o vendedor.
@@ -109,7 +109,7 @@ function handleFinishOrder(name: string) {
           class="btn-primary text-lg"
         >
           <MessageCircle class="w-5 h-5" />
-          Chamar no WhatsApp Agora
+          Negociar agora no WhatsApp
         </button>
       </section>
 
@@ -136,3 +136,4 @@ function handleFinishOrder(name: string) {
     </button>
   </div>
 </template>
+

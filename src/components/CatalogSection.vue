@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
-import { ArrowDownAZ, Search } from 'lucide-vue-next';
+import { ArrowDownAZ, Search, SearchX } from 'lucide-vue-next';
 import type { Product, ProductCategory } from '../types';
 import ProductCard from './ProductCard.vue';
 
@@ -47,10 +47,10 @@ const filtered = computed(() => {
     <div class="max-w-7xl mx-auto px-4">
       <div class="text-center mb-12">
         <h2 class="text-4xl md:text-5xl font-bold text-ice font-heading mb-3">
-          Catálogo de <span class="text-cheese">Equipamentos</span>
+          Catálogo de <span class="text-cheese">equipamentos</span>
         </h2>
         <p class="text-lg text-white max-w-2xl mx-auto leading-relaxed">
-          Equipamento pronto para uso. Consulte disponibilidade e negocie direto pelo WhatsApp.
+          Equipamentos prontos para uso. Consulte disponibilidade, fotos e condições pelo WhatsApp.
         </p>
       </div>
 
@@ -98,10 +98,11 @@ const filtered = computed(() => {
         v-if="filtered.length === 0"
         class="flex flex-col items-center justify-center py-20 text-center"
       >
-        <div class="text-5xl mb-4">🔍</div>
-        <p class="text-xl text-ice/70">Nenhum equipamento encontrado</p>
-        <p class="text-sm text-ice/50 mt-2">Tente outra categoria ou termo de busca</p>
+        <SearchX class="w-10 h-10 text-white/70 mb-4" />
+        <p class="text-xl text-white">Nenhum equipamento encontrado</p>
+        <p class="text-base text-white/70 mt-2">Tente outra categoria ou termo de busca.</p>
       </div>
     </div>
   </section>
 </template>
+

@@ -142,7 +142,7 @@ watch(galleryOpen, (open) => {
     ]"
   >
     <div
-      class="relative overflow-hidden h-52 bg-coal cursor-zoom-in"
+      class="relative overflow-hidden h-52 cursor-zoom-in product-thumb-bg"
       @click="openGallery(0)"
     >
       <img
@@ -150,7 +150,7 @@ watch(galleryOpen, (open) => {
         :alt="product.name"
         loading="lazy"
         decoding="async"
-        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+        class="w-full h-full object-contain p-3 group-hover:scale-[1.04] transition-transform duration-500"
       />
 
       <div
@@ -222,7 +222,7 @@ watch(galleryOpen, (open) => {
           class="btn-secondary px-3 py-2.5 text-sm"
         >
           <Plus class="w-4 h-4" />
-          Tenho Interesse
+          Separar item
         </button>
         <button
           @click="openProductWhatsApp(product)"
@@ -230,7 +230,7 @@ watch(galleryOpen, (open) => {
           class="btn-primary px-4 py-3 text-base"
         >
           <MessageCircle class="w-4 h-4" />
-          WhatsApp
+          Negociar agora
         </button>
       </div>
     </div>
@@ -299,7 +299,7 @@ watch(galleryOpen, (open) => {
           >
             <img
               :src="img"
-              :alt="`${product.name} — foto ${idx + 1}`"
+              :alt="`${product.name} - foto ${idx + 1}`"
               loading="lazy"
               decoding="async"
               draggable="false"
@@ -373,10 +373,17 @@ watch(galleryOpen, (open) => {
 .carousel-item img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   display: block;
+  padding: 14px;
   user-select: none;
   -webkit-user-drag: none;
+}
+
+.product-thumb-bg {
+  background:
+    radial-gradient(circle at 50% 35%, rgba(255, 214, 10, 0.06) 0%, transparent 60%),
+    linear-gradient(180deg, #161616 0%, #0b0b0b 100%);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -385,3 +392,4 @@ watch(galleryOpen, (open) => {
   }
 }
 </style>
+

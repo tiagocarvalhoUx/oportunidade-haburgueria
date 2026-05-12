@@ -38,15 +38,15 @@ h6 {
 
 @layer components {
   .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 rounded-lg bg-whatsapp px-7 py-4 text-base font-extrabold text-burger-dark shadow-lg shadow-green-900/25 transition-all hover:bg-green-400 hover:shadow-xl hover:shadow-green-900/30 hover:scale-[1.02] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-whatsapp disabled:opacity-50 disabled:cursor-not-allowed;
+    @apply relative isolate inline-flex items-center justify-center gap-2 overflow-hidden rounded-lg border border-white/20 bg-whatsapp px-7 py-4 text-base font-extrabold text-burger-dark shadow-[0_14px_34px_-14px_rgba(37,211,102,0.9)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-green-400 hover:shadow-[0_18px_44px_-16px_rgba(37,211,102,1)] active:translate-y-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-whatsapp disabled:pointer-events-none disabled:opacity-50 disabled:cursor-not-allowed;
   }
 
   .btn-secondary {
-    @apply inline-flex items-center justify-center gap-2 rounded-lg border border-cheese/55 bg-cheese/10 px-6 py-3 text-base font-semibold text-white transition-all hover:bg-cheese/20 hover:border-cheese/80 hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed;
+    @apply relative inline-flex items-center justify-center gap-2 rounded-lg border border-white/20 bg-white/[0.07] px-6 py-3 text-base font-bold text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.12)] transition-all duration-300 hover:-translate-y-0.5 hover:border-cheese/70 hover:bg-cheese/15 hover:shadow-[0_12px_30px_-18px_rgba(214,168,79,0.9)] active:translate-y-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cheese disabled:pointer-events-none disabled:opacity-50 disabled:cursor-not-allowed;
   }
 
   .btn-tertiary {
-    @apply inline-flex items-center justify-center gap-2 rounded-lg border border-white/15 bg-white/5 px-5 py-2.5 text-sm font-semibold text-white transition-all hover:bg-white/10 hover:border-white/30;
+    @apply inline-flex items-center justify-center gap-2 rounded-lg border border-white/15 bg-white/5 px-5 py-2.5 text-sm font-semibold text-white transition-all duration-300 hover:border-white/30 hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cheese;
   }
 
   .surface-card {
@@ -56,6 +56,23 @@ h6 {
   .feature-card {
     @apply rounded-lg border border-cheese/10 bg-surface-light p-6 text-burger-dark shadow-xl shadow-black/20 transition-all hover:-translate-y-1 hover:shadow-2xl;
   }
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  inset: 1px;
+  z-index: -1;
+  border-radius: 7px;
+  background:
+    linear-gradient(120deg, rgba(255, 255, 255, 0.55), transparent 28%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.2), transparent 55%);
+  opacity: 0.45;
+  transition: opacity 0.3s ease;
+}
+
+.btn-primary:hover::before {
+  opacity: 0.7;
 }
 
 button {

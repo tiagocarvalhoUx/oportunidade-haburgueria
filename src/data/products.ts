@@ -3,7 +3,7 @@ import type { Product, Testimonial, Promotion } from '../types';
 export const products: Product[] = [
   {
     id: 'chapa-lanche',
-    name: 'Char Broiler Profissional Croydon CCP3 — 75 cm a Gás',
+    name: 'Char Broiler Profissional Croydon CCP3 - 75 cm a Gás',
     description:
       'Char Broiler profissional 75 cm com 3 queimadores independentes, grelhas em ferro fundido e estrutura em aço inox. Ideal para hamburguerias, lanchonetes e churrascos profissionais.',
     price: 2000,
@@ -27,9 +27,9 @@ export const products: Product[] = [
       'Gaveta coletora de gordura removível',
       'Pés ajustáveis para nivelamento',
       'Regulado para Gás GLP (botijão)',
-      'Dimensões: 41 × 75 × 74 cm — Peso: 48 kg',
+      'Dimensões: 41 × 75 × 74 cm - Peso: 48 kg',
     ],
-    condition: 'Usada — pronta para uso',
+    condition: 'Usada - pronta para uso',
     status: 'disponivel',
     badge: 'DESTAQUE',
   },

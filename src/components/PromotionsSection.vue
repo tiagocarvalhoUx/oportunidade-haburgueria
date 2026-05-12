@@ -13,8 +13,8 @@ const STEPS = [
   },
   {
     icon: Phone,
-    title: 'Chame no WhatsApp',
-    description: 'Clique no botão do produto desejado para falar direto com o vendedor.',
+    title: 'Negocie no WhatsApp',
+    description: 'Clique no botão do item desejado para falar direto com o vendedor.',
   },
   {
     icon: FileText,
@@ -37,10 +37,10 @@ const STEPS = [
     <div class="max-w-7xl mx-auto px-4 relative z-10">
       <div class="text-center mb-14">
         <h2 class="text-4xl md:text-5xl font-bold text-ice font-heading mb-3">
-          Condições <span class="text-fire">Especiais</span>
+          Condições <span class="text-fire">especiais</span>
         </h2>
         <p class="text-lg text-white max-w-2xl mx-auto leading-relaxed">
-          Quem leva mais de um item, fecha melhor. Consulte negociação direto pelo WhatsApp.
+          Quem leva mais de um item pode conseguir uma condição melhor. Consulte pelo WhatsApp.
         </p>
       </div>
 
@@ -73,7 +73,7 @@ const STEPS = [
             </span>
           </div>
           <h3 class="text-2xl md:text-4xl font-bold text-burger-dark font-heading mb-3">
-            Quer Montar uma Hamburgueria?
+            Quer montar uma hamburgueria?
           </h3>
           <p class="text-burger-dark/80 mb-6 text-base md:text-lg max-w-2xl mx-auto">
             Leve vários equipamentos em um só pacote. Temos itens essenciais para quem deseja
@@ -85,7 +85,7 @@ const STEPS = [
             class="btn-primary"
           >
             <MessageCircle class="w-4 h-4" />
-            Negociar Pacote pelo WhatsApp
+            Negociar pacote no WhatsApp
           </button>
         </div>
       </div>
@@ -96,7 +96,7 @@ const STEPS = [
     <div class="max-w-7xl mx-auto px-4">
       <div class="text-center mb-14">
         <h2 class="text-4xl md:text-5xl font-bold text-ice font-heading mb-3">
-          Como <span class="text-cheese">Comprar</span>
+          Como <span class="text-cheese">comprar</span>
         </h2>
         <p class="text-lg text-white max-w-2xl mx-auto leading-relaxed">
           Processo simples e direto. Sem intermediários, sem burocracia.
@@ -122,3 +122,4 @@ const STEPS = [
     </div>
   </section>
 </template>
+
