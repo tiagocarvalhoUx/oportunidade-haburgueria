@@ -253,13 +253,13 @@ watch(galleryOpen, (open) => {
       >
         <button
           @click="close"
-          class="absolute top-5 right-5 text-white/80 hover:text-cheese transition-colors p-2.5 bg-coal/70 hover:bg-coal/90 rounded-full backdrop-blur z-30 ring-1 ring-white/10"
+          class="absolute top-5 right-5 text-white/80 hover:text-cheese transition-colors p-2.5 bg-coal/80 hover:bg-coal/95 rounded-full backdrop-blur z-[110] ring-1 ring-cheese/40 shadow-lg"
           aria-label="Fechar"
         >
           <X class="w-6 h-6" />
         </button>
 
-        <div class="absolute top-5 left-5 z-30 bg-coal/70 backdrop-blur rounded-full px-4 py-2 ring-1 ring-cheese/30">
+        <div class="absolute top-5 left-5 z-[110] bg-coal/80 backdrop-blur rounded-full px-4 py-2 ring-1 ring-cheese/30 max-w-[60vw]">
           <p class="text-white font-heading font-bold text-sm md:text-base leading-tight">
             {{ product.name }}
           </p>
@@ -269,7 +269,7 @@ watch(galleryOpen, (open) => {
         <button
           v-if="gallery.length > 1"
           @click="prev"
-          class="absolute left-3 md:left-8 z-30 text-white hover:text-cheese transition-all p-3 md:p-4 bg-coal/70 hover:bg-coal/90 rounded-full backdrop-blur ring-1 ring-white/10 hover:scale-110"
+          class="absolute left-3 md:left-8 z-[110] text-white hover:text-cheese transition-all p-3 md:p-4 bg-coal/80 hover:bg-coal/95 rounded-full backdrop-blur ring-1 ring-white/10 hover:scale-110"
           aria-label="Anterior"
         >
           <ChevronLeft class="w-6 h-6" />
@@ -278,7 +278,7 @@ watch(galleryOpen, (open) => {
         <button
           v-if="gallery.length > 1"
           @click="next"
-          class="absolute right-3 md:right-8 z-30 text-white hover:text-cheese transition-all p-3 md:p-4 bg-coal/70 hover:bg-coal/90 rounded-full backdrop-blur ring-1 ring-white/10 hover:scale-110"
+          class="absolute right-3 md:right-8 z-[110] text-white hover:text-cheese transition-all p-3 md:p-4 bg-coal/80 hover:bg-coal/95 rounded-full backdrop-blur ring-1 ring-white/10 hover:scale-110"
           aria-label="Próxima"
         >
           <ChevronRight class="w-6 h-6" />
@@ -314,7 +314,7 @@ watch(galleryOpen, (open) => {
         <!-- Dots indicator -->
         <div
           v-if="gallery.length > 1"
-          class="absolute bottom-6 left-1/2 -translate-x-1/2 z-30 flex gap-2 bg-coal/70 backdrop-blur rounded-full px-4 py-2.5 ring-1 ring-white/10"
+          class="absolute bottom-6 left-1/2 -translate-x-1/2 z-[110] flex gap-2 bg-coal/80 backdrop-blur rounded-full px-4 py-2.5 ring-1 ring-white/10"
         >
           <button
             v-for="(_, idx) in gallery"
