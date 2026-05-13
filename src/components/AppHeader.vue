@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import { Menu, X, ListChecks, MessageCircle, Store } from 'lucide-vue-next';
+import { Menu, X, ListChecks, Store } from 'lucide-vue-next';
+import WhatsAppButton from './WhatsAppButton.vue';
 
 defineProps<{ cartItemCount: number }>();
 const emit = defineEmits<{
@@ -70,13 +71,13 @@ function scrollTo(id: string) {
           </span>
         </button>
 
-        <button
+        <WhatsAppButton
+          size="sm"
+          label="Negociar"
+          subtitle="WhatsApp"
+          class="hidden md:inline-flex"
           @click="emit('whatsappClick')"
-          class="btn-primary hidden px-5 py-2.5 text-sm md:flex"
-        >
-          <MessageCircle class="w-4 h-4" />
-          Negociar no WhatsApp
-        </button>
+        />
 
         <button
           @click="isOpen = !isOpen"
@@ -109,12 +110,14 @@ function scrollTo(id: string) {
           >
             {{ item.label }}
           </button>
-          <button
+          <WhatsAppButton
+            size="md"
+            label="Negociar agora"
+            subtitle="WhatsApp"
+            block
+            class="mt-2"
             @click="emit('whatsappClick')"
-            class="btn-primary mt-2 w-full px-4 py-3"
-          >
-            Negociar no WhatsApp
-          </button>
+          />
         </div>
       </div>
     </Transition>

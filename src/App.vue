@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import { MessageCircle } from 'lucide-vue-next';
 import AppHeader from './components/AppHeader.vue';
 import ScrollProgress from './components/ScrollProgress.vue';
 import HeroSection from './components/HeroSection.vue';
@@ -12,6 +11,7 @@ import AboutSection from './components/AboutSection.vue';
 import CartModal from './components/CartModal.vue';
 import AppFooter from './components/AppFooter.vue';
 import WhatsAppFab from './components/WhatsAppFab.vue';
+import WhatsAppButton from './components/WhatsAppButton.vue';
 
 import { useCart } from './composables/useCart';
 import { products, categories, testimonials, promotions } from './data/products';
@@ -105,13 +105,12 @@ function handleFinishOrder(name: string) {
         <p class="text-lg text-white max-w-2xl mx-auto mb-8 leading-relaxed">
           Fale agora pelo WhatsApp, consulte disponibilidade e negocie direto com o vendedor.
         </p>
-        <button
+        <WhatsAppButton
+          size="lg"
+          label="Negociar agora"
+          subtitle="Resposta rápida no WhatsApp"
           @click="openGeneralWhatsApp"
-          class="btn-primary text-lg"
-        >
-          <MessageCircle class="w-5 h-5" />
-          Negociar agora no WhatsApp
-        </button>
+        />
       </section>
 
       <AppFooter />

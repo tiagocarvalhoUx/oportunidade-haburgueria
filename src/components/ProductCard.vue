@@ -2,7 +2,6 @@
 import { computed, ref, onMounted, onUnmounted, watch } from 'vue';
 import {
   Plus,
-  MessageCircle,
   CheckCircle2,
   Clock,
   XCircle,
@@ -13,6 +12,7 @@ import {
 } from 'lucide-vue-next';
 import type { Product } from '../types';
 import { openProductWhatsApp } from '../utils/whatsapp';
+import WhatsAppIcon from './icons/WhatsAppIcon.vue';
 
 const props = defineProps<{ product: Product }>();
 defineEmits<{ (e: 'addToList', product: Product): void }>();
@@ -251,22 +251,34 @@ watch(galleryOpen, (open) => {
         </div>
       </div>
 
-      <div class="grid grid-cols-[0.95fr_1.15fr] gap-3 pt-3">
+      <div class="grid grid-cols-[0.85fr_1.25fr] gap-2.5 pt-3">
         <button
           @click="$emit('addToList', product)"
           :disabled="isUnavailable"
-          class="btn-secondary px-3 py-2.5 text-sm"
+          class="card-cta card-cta--secondary"
+          aria-label="Separar este item para enviar como combo"
         >
-          <Plus class="w-4 h-4" />
-          Separar item
+          <Plus class="w-[18px] h-[18px] shrink-0 card-cta__icon" />
+          <span class="card-cta__labels">
+            <span class="card-cta__title">Separar</span>
+            <span class="card-cta__subtitle">montar combo</span>
+          </span>
         </button>
+
         <button
           @click="openProductWhatsApp(product)"
           :disabled="isUnavailable"
-          class="btn-primary px-4 py-3 text-base"
+          class="card-cta card-cta--primary"
+          aria-label="Negociar este item agora pelo WhatsApp"
         >
-          <MessageCircle class="w-4 h-4" />
-          Negociar agora
+          <span class="card-cta__icon-wrap">
+            <WhatsAppIcon class="w-[20px] h-[20px] card-cta__icon" />
+            <span class="card-cta__online" aria-hidden="true"></span>
+          </span>
+          <span class="card-cta__labels">
+            <span class="card-cta__title">Negociar</span>
+            <span class="card-cta__subtitle">via WhatsApp</span>
+          </span>
         </button>
       </div>
     </div>
@@ -430,6 +442,194 @@ watch(galleryOpen, (open) => {
 @media (prefers-reduced-motion: reduce) {
   .carousel-item {
     transition: none;
+  }
+}
+
+/* Card CTAs */
+.card-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  padding: 0.6rem 0.85rem;
+  min-height: 52px;
+  border-radius: 10px;
+  font-weight: 700;
+  white-space: nowrap;
+  transition:
+    transform 0.2s ease,
+    background-color 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.card-cta:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.card-cta:focus-visible {
+  outline: 2px solid #ffd60a;
+  outline-offset: 2px;
+}
+
+.card-cta__labels {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  line-height: 1.05;
+  text-align: left;
+}
+
+.card-cta__title {
+  font-size: 0.95rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+.card-cta__subtitle {
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  opacity: 0.7;
+  margin-top: 2px;
+}
+
+.card-cta__icon {
+  transition: transform 0.25s cubic-bezier(0.34, 1.4, 0.64, 1);
+}
+
+.card-cta:hover .card-cta__icon {
+  transform: translateX(2px) scale(1.08);
+}
+
+.card-cta:active {
+  transform: scale(0.97);
+}
+
+/* Secondary */
+.card-cta--secondary {
+  background: rgba(255, 255, 255, 0.04);
+  color: #f4efe5;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.card-cta--secondary:hover {
+  background: rgba(214, 168, 79, 0.08);
+  border-color: rgba(214, 168, 79, 0.45);
+  color: #fff;
+}
+
+.card-cta--secondary .card-cta__subtitle {
+  color: #d6a84f;
+  opacity: 0.85;
+}
+
+/* Primary (WhatsApp) */
+.card-cta--primary {
+  background: linear-gradient(135deg, #25d366 0%, #1ebe5b 100%);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow:
+    0 10px 22px -10px rgba(37, 211, 102, 0.85),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.18);
+}
+
+.card-cta--primary::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, rgba(255, 255, 255, 0.28) 0%, transparent 35%);
+  opacity: 0.7;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.card-cta--primary::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    100deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.35) 50%,
+    transparent 100%
+  );
+  transform: skewX(-20deg);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.card-cta--primary:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 16px 32px -10px rgba(37, 211, 102, 1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.card-cta--primary:hover::after {
+  animation: ctaShine 0.85s ease-out;
+}
+
+@keyframes ctaShine {
+  0% {
+    left: -75%;
+  }
+  100% {
+    left: 125%;
+  }
+}
+
+.card-cta__icon-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-cta__online {
+  position: absolute;
+  top: -1px;
+  right: -2px;
+  width: 8px;
+  height: 8px;
+  border-radius: 9999px;
+  background: #34ff9c;
+  border: 2px solid #1ebe5b;
+  box-shadow: 0 0 0 0 rgba(52, 255, 156, 0.6);
+  animation: ctaPulse 2s ease-out infinite;
+}
+
+@keyframes ctaPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(52, 255, 156, 0.65);
+  }
+  70% {
+    box-shadow: 0 0 0 6px rgba(52, 255, 156, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(52, 255, 156, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card-cta,
+  .card-cta__icon,
+  .card-cta--primary::after,
+  .card-cta__online {
+    animation: none !important;
+    transition: none !important;
   }
 }
 </style>

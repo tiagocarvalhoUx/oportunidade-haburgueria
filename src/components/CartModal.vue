@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import { X, Plus, Minus, MessageCircle, Trash2, ListChecks } from 'lucide-vue-next';
+import { X, Plus, Minus, Trash2, ListChecks } from 'lucide-vue-next';
+import WhatsAppButton from './WhatsAppButton.vue';
 import type { CartItem } from '../types';
 
 defineProps<{
@@ -155,13 +156,13 @@ function priceText(price: number, label?: string) {
           </p>
         </div>
 
-        <button
+        <WhatsAppButton
+          size="md"
+          label="Enviar lista"
+          subtitle="Combinar valores no WhatsApp"
+          block
           @click="emit('finish', customerName)"
-          class="btn-primary w-full py-3"
-        >
-          <MessageCircle class="w-5 h-5" />
-          Enviar lista no WhatsApp
-        </button>
+        />
 
         <button
           @click="emit('close')"

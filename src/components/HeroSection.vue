@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { ArrowDown, Tag, Truck, ShieldCheck, Handshake, MessageCircle } from 'lucide-vue-next';
+import { ArrowDown, Tag, Truck, ShieldCheck, Handshake } from 'lucide-vue-next';
+import WhatsAppButton from './WhatsAppButton.vue';
 
 defineEmits<{
   (e: 'viewCatalog'): void;
@@ -51,13 +52,12 @@ const seals = [
           </div>
 
           <div class="flex flex-col sm:flex-row gap-3 pt-4">
-            <button
+            <WhatsAppButton
+              size="md"
+              label="Ver preço"
+              subtitle="resposta no WhatsApp"
               @click="$emit('whatsapp')"
-              class="btn-primary"
-            >
-              <MessageCircle class="w-5 h-5" />
-              Ver preço no WhatsApp
-            </button>
+            />
             <button
               @click="$emit('viewCatalog')"
               class="btn-secondary"

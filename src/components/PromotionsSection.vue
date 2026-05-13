@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { Package, MessageCircle, Search, Phone, FileText, Handshake } from 'lucide-vue-next';
+import { Package, Search, Phone, FileText, Handshake } from 'lucide-vue-next';
+import WhatsAppButton from './WhatsAppButton.vue';
 import type { Promotion } from '../types';
 
 defineProps<{ promotions: Promotion[] }>();
@@ -80,13 +81,12 @@ const STEPS = [
             montar ou ampliar uma lanchonete, hamburgueria, trailer, delivery ou cozinha
             comercial. Consulte condições especiais para compra de múltiplos itens.
           </p>
-          <button
+          <WhatsAppButton
+            size="md"
+            label="Negociar pacote"
+            subtitle="condição especial no WhatsApp"
             @click="$emit('whatsappPackage')"
-            class="btn-primary"
-          >
-            <MessageCircle class="w-4 h-4" />
-            Negociar pacote no WhatsApp
-          </button>
+          />
         </div>
       </div>
     </div>
