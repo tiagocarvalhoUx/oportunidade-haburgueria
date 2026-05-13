@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 import AppHeader from './components/AppHeader.vue';
 import ScrollProgress from './components/ScrollProgress.vue';
 import HeroSection from './components/HeroSection.vue';
@@ -19,6 +19,29 @@ import type { Product, ProductCategory } from './types';
 import { openWhatsApp, generateBatchInterestMessage } from './utils/whatsapp';
 
 const activeCategory = ref<ProductCategory>('all');
+
+const categoryCounts = computed<Record<string, number>>(() => {
+  const counts: Record<string, number> = { all: products.length };
+  counts.vendidos = products.filter((p) => p.status === 'vendido').length;
+  counts.promocoes = products.filter((p) => p.isPromotion || !!p.badge).length;
+  for (const p of products) {
+    if (p.category && p.category !== 'all') {
+      counts[p.category] = (counts[p.category] || 0) + 1;
+    }
+  }
+  return counts;
+});
+
+function handleCategoryChange(category: ProductCategory) {
+  activeCategory.value = category;
+  requestAnimationFrame(() => {
+    const el = document.getElementById('equipamentos');
+    if (!el) return;
+    const headerOffset = 140;
+    const top = el.getBoundingClientRect().top + window.scrollY - headerOffset;
+    window.scrollTo({ top, behavior: 'smooth' });
+  });
+}
 const cartOpen = ref(false);
 const { items, total, count, addToCart, removeFromCart, updateQuantity, clearCart } = useCart();
 
@@ -69,13 +92,12 @@ function handleFinishOrder(name: string) {
       <section
         class="sticky top-[68px] z-20 bg-coal/95 backdrop-blur-md border-b border-cheese/10 py-3"
       >
-        <div class="max-w-7xl mx-auto px-4 overflow-x-auto">
-          <CategoryFilter
-            :categories="categories"
-            :active-category="activeCategory"
-            @change="(c) => (activeCategory = c)"
-          />
-        </div>
+        <CategoryFilter
+          :categories="categories"
+          :active-category="activeCategory"
+          :counts="categoryCounts"
+          @change="handleCategoryChange"
+        />
       </section>
 
       <CatalogSection
