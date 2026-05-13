@@ -3,6 +3,15 @@ import { CartItem, Product } from '../types/index';
 export const WHATSAPP_NUMBER = '5518981142927';
 
 function formatPrice(product: Product): string {
+  if (
+    typeof product.minPrice === 'number' &&
+    typeof product.maxPrice === 'number' &&
+    product.maxPrice > 0
+  ) {
+    const fmt = (v: number) =>
+      `R$ ${v.toLocaleString('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}`;
+    return `${fmt(product.minPrice)} a ${fmt(product.maxPrice)} (negociável)`;
+  }
   if (product.price > 0) return `R$ ${product.price.toFixed(2)}`;
   return product.priceLabel || 'A consultar';
 }

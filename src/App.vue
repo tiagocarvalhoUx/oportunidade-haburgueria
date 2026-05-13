@@ -11,6 +11,7 @@ import TrustNotices from './components/TrustNotices.vue';
 import AboutSection from './components/AboutSection.vue';
 import CartModal from './components/CartModal.vue';
 import AppFooter from './components/AppFooter.vue';
+import WhatsAppFab from './components/WhatsAppFab.vue';
 
 import { useCart } from './composables/useCart';
 import { products, categories, testimonials, promotions } from './data/products';
@@ -126,14 +127,7 @@ function handleFinishOrder(name: string) {
       @finish="handleFinishOrder"
     />
 
-    <!-- Floating WhatsApp -->
-    <button
-      @click="openGeneralWhatsApp"
-      aria-label="WhatsApp"
-      class="fixed bottom-6 right-6 z-50 bg-whatsapp hover:bg-green-400 text-burger-dark rounded-full p-4 shadow-2xl transition-all hover:scale-110 fab-glow"
-    >
-      <MessageCircle class="w-6 h-6" />
-    </button>
+    <WhatsAppFab :hidden="cartOpen" @click="openGeneralWhatsApp" />
   </div>
 </template>
 

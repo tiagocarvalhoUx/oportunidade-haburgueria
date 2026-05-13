@@ -17,6 +17,8 @@ export interface Product {
   description: string;
   price: number;
   priceLabel?: string;
+  minPrice?: number;
+  maxPrice?: number;
   category: ProductCategory;
   image: string;
   gallery?: string[];

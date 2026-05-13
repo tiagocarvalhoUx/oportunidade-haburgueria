@@ -37,11 +37,25 @@ const STATUS_CONFIG = {
 
 const status = computed(() => STATUS_CONFIG[props.product.status]);
 const isUnavailable = computed(() => props.product.status === 'vendido');
-const priceText = computed(() =>
-  props.product.price > 0
-    ? `R$ ${props.product.price.toFixed(2).replace('.', ',')}`
-    : props.product.priceLabel || 'A consultar',
+const hasPriceRange = computed(
+  () =>
+    typeof props.product.minPrice === 'number' &&
+    typeof props.product.maxPrice === 'number' &&
+    props.product.maxPrice > 0,
 );
+
+function formatBRL(value: number) {
+  return `R$ ${value.toLocaleString('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}`;
+}
+
+const priceText = computed(() => {
+  if (hasPriceRange.value) {
+    return `${formatBRL(props.product.minPrice!)} – ${formatBRL(props.product.maxPrice!)}`;
+  }
+  return props.product.price > 0
+    ? `R$ ${props.product.price.toFixed(2).replace('.', ',')}`
+    : props.product.priceLabel || 'A consultar';
+});
 
 const gallery = computed(() =>
   props.product.gallery && props.product.gallery.length > 0
@@ -142,15 +156,24 @@ watch(galleryOpen, (open) => {
     ]"
   >
     <div
-      class="relative overflow-hidden h-52 cursor-zoom-in product-thumb-bg"
+      class="relative overflow-hidden aspect-square cursor-zoom-in product-thumb-bg"
       @click="openGallery(0)"
     >
+      <img
+        :src="product.image"
+        alt=""
+        aria-hidden="true"
+        loading="lazy"
+        decoding="async"
+        class="absolute inset-0 w-full h-full object-cover scale-110 blur-2xl opacity-55 saturate-125"
+      />
+      <div class="absolute inset-0 bg-gradient-to-b from-coal/40 via-coal/10 to-coal/70"></div>
       <img
         :src="product.image"
         :alt="product.name"
         loading="lazy"
         decoding="async"
-        class="w-full h-full object-contain p-3 group-hover:scale-[1.04] transition-transform duration-500"
+        class="relative w-full h-full object-contain p-2 group-hover:scale-[1.04] transition-transform duration-500 product-thumb-fg"
       />
 
       <div
@@ -205,7 +228,20 @@ watch(galleryOpen, (open) => {
         </li>
       </ul>
 
-      <div class="flex items-end justify-between pt-1">
+      <div
+        v-if="hasPriceRange"
+        class="pt-1 p-3 rounded-lg border border-cheese/25 bg-cheese/[0.06]"
+      >
+        <p class="text-[11px] text-ice/70 uppercase tracking-wide font-semibold mb-1">
+          Faixa de preço
+        </p>
+        <div class="text-2xl font-bold text-cheese font-heading leading-tight">
+          {{ priceText }}
+        </div>
+        <p class="text-[11px] text-ice/55 mt-1">Negociável conforme condição</p>
+      </div>
+
+      <div v-else class="flex items-end justify-between pt-1">
         <div>
           <div class="text-sm text-white uppercase tracking-wide">Valor</div>
           <div class="text-2xl font-bold text-cheese font-heading">{{ priceText }}</div>
@@ -384,6 +420,11 @@ watch(galleryOpen, (open) => {
   background:
     radial-gradient(circle at 50% 35%, rgba(255, 214, 10, 0.06) 0%, transparent 60%),
     linear-gradient(180deg, #161616 0%, #0b0b0b 100%);
+}
+
+.product-thumb-fg {
+  filter: drop-shadow(0 14px 18px rgba(0, 0, 0, 0.55))
+    drop-shadow(0 4px 6px rgba(0, 0, 0, 0.4));
 }
 
 @media (prefers-reduced-motion: reduce) {
