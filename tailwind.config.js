@@ -23,11 +23,16 @@ export default {
         'spin-slower': 'spin 40s linear infinite reverse',
         'bounce-soft': 'bounceSoft 3s ease-in-out infinite',
         'bounce-soft-delay': 'bounceSoft 3s ease-in-out 0.5s infinite',
+        'flip-y': 'flipY 4s linear infinite',
       },
       keyframes: {
         bounceSoft: {
           '0%, 100%': { transform: 'translateY(0)' },
           '50%': { transform: 'translateY(-8px)' },
+        },
+        flipY: {
+          '0%':   { transform: 'rotateY(0deg)' },
+          '100%': { transform: 'rotateY(360deg)' },
         },
       },
     },

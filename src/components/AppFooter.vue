@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { MapPin, Phone, Clock, Instagram, MessageCircle, Store } from 'lucide-vue-next';
+import { MapPin, Phone, Clock, Instagram, MessageCircle } from 'lucide-vue-next';
 import { WHATSAPP_NUMBER } from '../utils/whatsapp';
 
 const year = new Date().getFullYear();
@@ -18,15 +18,21 @@ const whatsappLink = `https://wa.me/${WHATSAPP_NUMBER}`;
     <div class="max-w-7xl mx-auto px-4 py-14">
       <div class="grid grid-cols-1 md:grid-cols-3 gap-10 mb-10">
         <div>
-          <div class="flex items-center gap-3 mb-4">
-            <div
-              class="grid h-10 w-10 place-items-center rounded-lg bg-cheese/15 text-cheese ring-1 ring-cheese/25"
-            >
-              <Store class="h-5 w-5" />
-            </div>
+          <div class="og-logo-link flex items-center gap-3 mb-4">
+            <span class="og-logo-flip">
+              <img
+                src="/logo.png"
+                alt="Oportunidade Hamburgueria"
+                class="h-16 w-auto object-contain drop-shadow"
+                width="64"
+                height="64"
+                loading="lazy"
+                decoding="async"
+              />
+            </span>
             <div>
-              <h3 class="text-lg font-bold text-ice font-heading">Liquidação de Hamburgueria</h3>
-              <p class="text-xs text-white/80">Equipamentos e móveis comerciais</p>
+              <h3 class="text-lg font-bold text-ice font-heading">Oportunidade Hamburgueria</h3>
+              <p class="text-xs text-white/80">Equipamentos profissionais · Seminovos</p>
             </div>
           </div>
           <p class="text-white text-base leading-relaxed">
@@ -70,7 +76,9 @@ const whatsappLink = `https://wa.me/${WHATSAPP_NUMBER}`;
               <MessageCircle class="w-5 h-5" />
             </a>
             <a
-              href="#"
+              href="https://www.instagram.com/elite_webdesigner/"
+              target="_blank"
+              rel="noopener"
               aria-label="Instagram"
               class="p-3 bg-coal rounded-full text-ice hover:bg-cheese hover:text-burger-dark transition-colors"
             >
@@ -86,9 +94,10 @@ const whatsappLink = `https://wa.me/${WHATSAPP_NUMBER}`;
       <div
         class="flex flex-col md:flex-row items-center justify-between gap-3 pt-6 border-t border-cheese/10 text-xs text-white/60"
       >
-        <p>© {{ year }} Liquidação de Hamburgueria. Todos os direitos reservados.</p>
+        <p>© {{ year }} Oportunidade Hamburgueria. Todos os direitos reservados.</p>
         <p>Itens usados/seminovos · Valores negociáveis · Retirada combinada</p>
       </div>
     </div>
   </footer>
 </template>
+

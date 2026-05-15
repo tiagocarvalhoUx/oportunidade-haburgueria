@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import { Menu, X, ListChecks, Store } from 'lucide-vue-next';
+import { Menu, X, ListChecks } from 'lucide-vue-next';
 import WhatsAppButton from './WhatsAppButton.vue';
 
 defineProps<{ cartItemCount: number }>();
@@ -29,21 +29,30 @@ function scrollTo(id: string) {
     class="fixed top-0 left-0 right-0 bg-coal/95 backdrop-blur text-ice shadow-lg z-40 border-b border-cheese/10"
   >
     <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
-      <div class="flex items-center gap-3">
-        <div
-          class="grid h-10 w-10 place-items-center rounded-lg bg-cheese/15 text-cheese ring-1 ring-cheese/25"
-        >
-          <Store class="h-5 w-5" />
-        </div>
-        <div>
+      <a
+        href="#inicio"
+        class="og-logo-link flex items-center gap-3"
+        aria-label="Oportunidade Hamburgueria"
+      >
+        <span class="og-logo-flip">
+          <img
+            src="/logo.png"
+            alt="Oportunidade Hamburgueria"
+            class="h-12 md:h-14 w-auto object-contain drop-shadow"
+            width="56"
+            height="56"
+            decoding="async"
+          />
+        </span>
+        <div class="hidden sm:block">
           <h1 class="text-base md:text-lg font-bold text-ice font-heading leading-tight">
-            Liquidação de Hamburgueria
+            Oportunidade Hamburgueria
           </h1>
           <p class="text-[10px] md:text-[11px] text-white/85 tracking-wide">
-            Equipamentos e móveis comerciais
+            Equipamentos profissionais · Seminovos
           </p>
         </div>
-      </div>
+      </a>
 
       <nav class="hidden md:flex items-center gap-7">
         <button
@@ -123,3 +132,23 @@ function scrollTo(id: string) {
     </Transition>
   </header>
 </template>
+
+<style>
+.og-logo-link {
+  perspective: 1000px !important;
+  display: inline-flex !important;
+}
+.og-logo-flip {
+  display: inline-block !important;
+  transform-style: preserve-3d !important;
+  animation: ogLogoFlip 4s linear infinite !important;
+  will-change: transform;
+}
+.og-logo-link:hover .og-logo-flip {
+  animation-play-state: paused !important;
+}
+@keyframes ogLogoFlip {
+  0%   { transform: rotateY(0deg); }
+  100% { transform: rotateY(360deg); }
+}
+</style>
