@@ -2,12 +2,15 @@
 import { computed, ref } from 'vue';
 import AppHeader from './components/AppHeader.vue';
 import ScrollProgress from './components/ScrollProgress.vue';
+import TrustBand from './components/TrustBand.vue';
 import HeroSection from './components/HeroSection.vue';
 import CategoryFilter from './components/CategoryFilter.vue';
+import HowItWorks from './components/HowItWorks.vue';
 import CatalogSection from './components/CatalogSection.vue';
 import PromotionsSection from './components/PromotionsSection.vue';
-import TrustNotices from './components/TrustNotices.vue';
+import TestimonialsSection from './components/TestimonialsSection.vue';
 import AboutSection from './components/AboutSection.vue';
+import TransparencySection from './components/TransparencySection.vue';
 import CartModal from './components/CartModal.vue';
 import AppFooter from './components/AppFooter.vue';
 import WhatsAppFab from './components/WhatsAppFab.vue';
@@ -83,6 +86,8 @@ function handleFinishOrder(name: string) {
       @whatsapp-click="openGeneralWhatsApp"
     />
 
+    <TrustBand />
+
     <main>
       <HeroSection
         @view-catalog="scrollTo('equipamentos')"
@@ -90,7 +95,7 @@ function handleFinishOrder(name: string) {
       />
 
       <section
-        class="sticky top-[68px] z-20 bg-coal/95 backdrop-blur-md border-b border-cheese/10 py-3"
+        class="sticky top-16 lg:top-20 z-20 bg-coal/95 backdrop-blur-md border-b border-cheese/10 py-3"
       >
         <CategoryFilter
           :categories="categories"
@@ -99,6 +104,8 @@ function handleFinishOrder(name: string) {
           @change="handleCategoryChange"
         />
       </section>
+
+      <HowItWorks @whatsapp="openGeneralWhatsApp" />
 
       <CatalogSection
         :products="products"
@@ -111,7 +118,7 @@ function handleFinishOrder(name: string) {
         @whatsapp-package="openPackageWhatsApp"
       />
 
-      <TrustNotices :testimonials="testimonials" />
+      <TestimonialsSection :testimonials="testimonials" />
 
       <AboutSection />
 
@@ -134,6 +141,8 @@ function handleFinishOrder(name: string) {
           @click="openGeneralWhatsApp"
         />
       </section>
+
+      <TransparencySection />
 
       <AppFooter />
     </main>

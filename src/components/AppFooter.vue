@@ -19,7 +19,7 @@ const whatsappLink = `https://wa.me/${WHATSAPP_NUMBER}`;
       <div class="grid grid-cols-1 md:grid-cols-3 gap-10 mb-10">
         <div>
           <div class="og-logo-link flex items-center gap-3 mb-4">
-            <span class="og-logo-flip">
+            <span class="og-logo-flip-hover">
               <img
                 src="/logo.png"
                 alt="Oportunidade Hamburgueria"

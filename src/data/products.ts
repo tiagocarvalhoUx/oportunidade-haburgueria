@@ -31,6 +31,7 @@ export const products: Product[] = [
     ],
     condition: 'Usada - pronta para uso',
     status: 'disponivel',
+    hasRealPhotos: true,
     badge: 'DESTAQUE',
   },
   {
@@ -62,6 +63,7 @@ export const products: Product[] = [
     ],
     condition: 'Usada em bom estado',
     status: 'disponivel',
+    hasRealPhotos: true,
   },
   {
     id: 'estufa-batata',
@@ -88,6 +90,7 @@ export const products: Product[] = [
     ],
     condition: 'Usada',
     status: 'disponivel',
+    hasRealPhotos: true,
   },
   {
     id: 'pia-lanche',
@@ -112,6 +115,7 @@ export const products: Product[] = [
     ],
     condition: 'Usada em bom estado',
     status: 'disponivel',
+    hasRealPhotos: true,
   },
   {
     id: 'mesa-balcao',
@@ -139,6 +143,7 @@ export const products: Product[] = [
     ],
     condition: 'Usada em bom estado',
     status: 'disponivel',
+    hasRealPhotos: true,
     badge: 'NEGOCIÁVEL',
   },
   {
@@ -162,6 +167,7 @@ export const products: Product[] = [
     ],
     condition: 'Usada em bom estado',
     status: 'disponivel',
+    hasRealPhotos: true,
   },
   {
     id: 'bancada',
@@ -183,6 +189,7 @@ export const products: Product[] = [
     ],
     condition: 'Usada em bom estado',
     status: 'disponivel',
+    hasRealPhotos: true,
   },
   {
     id: 'casinha-gas',
@@ -206,6 +213,7 @@ export const products: Product[] = [
     ],
     condition: 'Usada',
     status: 'disponivel',
+    hasRealPhotos: true,
   },
 ];
 

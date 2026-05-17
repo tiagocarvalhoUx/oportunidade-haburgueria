@@ -28,6 +28,22 @@ export interface Product {
   isPromotion?: boolean;
   originalPrice?: number;
   badge?: string;
+
+  /** true = card exibe badge "📷 Foto real" */
+  hasRealPhotos?: boolean;
+
+  /** false = desliga badge "🔧 Teste no local". Default tratado como true no componente. */
+  testAvailable?: boolean;
+
+  /** Ficha técnica estruturada. Modal só renderiza chaves preenchidas. */
+  specs?: {
+    dimensions?: string;
+    voltage?: '110V' | '220V' | 'Bivolt';
+    power?: string;
+    capacity?: string;
+    brand?: string;
+    yearOfManufacture?: string;
+  };
 }
 
 export interface CartItem {
