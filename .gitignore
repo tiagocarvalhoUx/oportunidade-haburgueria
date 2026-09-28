@@ -38,3 +38,7 @@ Thumbs.db
 
 # Vite
 .vite
+
+# Python cache (skill scripts)
+__pycache__/
+*.pyc

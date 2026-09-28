@@ -8,6 +8,7 @@ import {
   Images,
   Camera,
   Wrench,
+  Sparkles,
 } from 'lucide-vue-next';
 import type { Product } from '../types';
 import { openProductWhatsApp } from '../utils/whatsapp';
@@ -21,17 +22,17 @@ const STATUS_CONFIG = {
   disponivel: {
     label: 'Disponível',
     icon: CheckCircle2,
-    cls: 'bg-green-500/20 text-green-400 border-green-500/40',
+    cls: 'bg-green-500/15 text-green-400 border-green-500/30',
   },
   reservado: {
     label: 'Reservado',
     icon: Clock,
-    cls: 'bg-cheese/20 text-cheese border-cheese/40',
+    cls: 'bg-cheese/15 text-cheese border-cheese/35',
   },
   vendido: {
     label: 'Vendido',
     icon: XCircle,
-    cls: 'bg-ketchup/20 text-ketchup border-ketchup/40',
+    cls: 'bg-ketchup/15 text-ketchup border-ketchup/35',
   },
 } as const;
 
@@ -68,36 +69,26 @@ function openDetail() { detailOpen.value = true; }
 </script>
 
 <template>
-  <div
-    :class="[
-      'surface-card overflow-hidden group hover:-translate-y-1 duration-300 hover:border-cheese/25',
-      isUnavailable ? 'opacity-70' : '',
-    ]"
-  >
+  <div :class="['product-card group', isUnavailable ? 'product-card--sold' : '']">
     <div
-      class="relative overflow-hidden aspect-square cursor-zoom-in product-thumb-bg"
+      class="relative overflow-hidden aspect-square cursor-zoom-in product-thumb-frame"
       @click="openDetail"
     >
-      <img
-        :src="product.image"
-        alt=""
-        aria-hidden="true"
-        loading="lazy"
-        decoding="async"
-        class="absolute inset-0 w-full h-full object-cover scale-110 blur-2xl opacity-55 saturate-125"
-      />
-      <div class="absolute inset-0 bg-gradient-to-b from-coal/40 via-coal/10 to-coal/70"></div>
+      <span class="product-thumb-floor" aria-hidden="true" />
+
       <img
         :src="product.image"
         :alt="product.name"
         loading="lazy"
         decoding="async"
-        class="relative w-full h-full object-contain p-2 group-hover:scale-[1.04] transition-transform duration-500 product-thumb-fg"
+        class="relative z-10 block w-full h-full object-contain p-5 sm:p-6 md:p-7 transition-transform duration-500 ease-out group-hover:scale-[1.045] product-thumb-fg"
       />
+
+      <span class="pointer-events-none absolute inset-0 z-[15] product-thumb-vignette" aria-hidden="true" />
 
       <div
         :class="[
-          'absolute top-3 left-3 inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold border backdrop-blur',
+          'absolute top-3 left-3 z-20 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold border backdrop-blur-md',
           status.cls,
         ]"
       >
@@ -105,48 +96,34 @@ function openDetail() { detailOpen.value = true; }
         {{ status.label }}
       </div>
 
-      <div class="absolute top-3 right-3 flex flex-col items-end gap-1.5">
-        <span v-if="product.badge" class="bg-fire text-white px-3 py-1 rounded-full text-xs font-bold shadow-lg">
-          {{ product.badge }}
-        </span>
-        <span
-          v-if="product.testAvailable !== false"
-          class="inline-flex items-center gap-1 bg-coal/70 text-ice px-2.5 py-1 rounded-full text-[10px] font-semibold border border-ice/20 backdrop-blur badge-test-pulse"
-        >
-          <Wrench class="w-3 h-3" />
-          Teste no local
-        </span>
-      </div>
-
-      <div class="absolute bottom-3 left-3 flex flex-wrap gap-2">
-        <span
-          v-if="product.hasRealPhotos"
-          class="inline-flex items-center gap-1 bg-coal/90 backdrop-blur text-green-300 px-2 py-1 rounded text-[11px] font-semibold border border-green-500/40"
-        >
-          <Camera class="w-3 h-3" />
-          Foto real
-        </span>
-        <span
-          class="bg-coal/90 backdrop-blur text-ice px-2 py-1 rounded text-[11px] font-semibold border border-cheese/20"
-        >
-          {{ product.condition }}
-        </span>
-        <span
-          v-if="gallery.length > 1"
-          class="inline-flex items-center gap-1 bg-coal/90 backdrop-blur text-white px-2 py-1 rounded text-[11px] font-semibold border border-cheese/30"
-        >
-          <Images class="w-3 h-3" />
-          {{ gallery.length }} fotos
-        </span>
+      <div v-if="product.badge" class="absolute top-3 right-3 z-20 product-ribbon">
+        <Sparkles class="w-3 h-3" />
+        {{ product.badge }}
       </div>
     </div>
 
     <div class="p-6 space-y-4">
+      <div class="flex flex-wrap items-center gap-x-3 gap-y-1 text-[11px] font-semibold uppercase tracking-wide text-ice/50">
+        <span v-if="product.hasRealPhotos" class="inline-flex items-center gap-1 text-green-400/90">
+          <Camera class="w-3 h-3" />
+          Foto real
+        </span>
+        <span>{{ product.condition }}</span>
+        <span v-if="product.testAvailable !== false" class="inline-flex items-center gap-1 text-cheese/90">
+          <Wrench class="w-3 h-3" />
+          Teste no local
+        </span>
+        <span v-if="gallery.length > 1" class="inline-flex items-center gap-1">
+          <Images class="w-3 h-3" />
+          {{ gallery.length }} fotos
+        </span>
+      </div>
+
       <h3 class="text-lg font-bold text-ice font-heading line-clamp-2">
         {{ product.name }}
       </h3>
 
-      <p class="text-base text-white line-clamp-2 leading-relaxed">
+      <p class="text-base text-white/80 line-clamp-2 leading-relaxed">
         {{ product.description }}
       </p>
 
@@ -156,7 +133,7 @@ function openDetail() { detailOpen.value = true; }
           :key="idx"
           class="text-sm text-ice/85 flex items-start gap-2 leading-snug"
         >
-          <span class="text-white mt-0.5">•</span>
+          <span class="text-cheese mt-0.5">•</span>
           <span>{{ feature }}</span>
         </li>
       </ul>
@@ -182,30 +159,29 @@ function openDetail() { detailOpen.value = true; }
         </span>
       </div>
 
-      <div
-        v-if="hasPriceRange"
-        class="pt-1 p-3 rounded-lg border border-cheese/25 bg-cheese/[0.06]"
-      >
-        <p class="text-[11px] text-ice/70 uppercase tracking-wide font-semibold mb-1">
+      <div v-if="hasPriceRange" class="price-box">
+        <p class="text-[11px] text-ice/60 uppercase tracking-wide font-semibold mb-1">
           Faixa de preço
         </p>
-        <div class="text-2xl font-bold text-cheese font-heading leading-tight">
+        <div class="text-[1.7rem] leading-none font-extrabold text-cheese font-heading tabular-nums">
           {{ priceText }}
         </div>
-        <p class="text-[11px] text-ice/55 mt-1">Negociável conforme condição</p>
+        <p class="text-[11px] text-ice/45 mt-1.5">Negociável conforme condição</p>
       </div>
 
-      <div v-else class="flex items-end justify-between pt-1">
+      <div v-else class="flex items-end justify-between pt-3 border-t border-white/[0.06]">
         <div>
-          <div class="text-sm text-white uppercase tracking-wide">Valor</div>
-          <div class="text-2xl font-bold text-cheese font-heading">{{ priceText }}</div>
+          <div class="text-[11px] text-ice/50 uppercase tracking-wide font-semibold">Valor</div>
+          <div class="text-[1.7rem] leading-tight font-extrabold text-cheese font-heading tabular-nums">
+            {{ priceText }}
+          </div>
         </div>
-        <div v-if="product.originalPrice" class="text-sm text-ice/50 line-through">
+        <div v-if="product.originalPrice" class="text-sm text-ice/40 line-through">
           R$ {{ product.originalPrice.toFixed(2).replace('.', ',') }}
         </div>
       </div>
 
-      <div class="grid grid-cols-[0.85fr_1.25fr] gap-2.5 pt-3">
+      <div class="grid grid-cols-[0.85fr_1.25fr] gap-2.5 pt-1">
         <button
           @click="emit('addToList', product)"
           :disabled="isUnavailable"
@@ -247,26 +223,96 @@ function openDetail() { detailOpen.value = true; }
 </template>
 
 <style scoped>
-.product-thumb-bg {
+/* === Card container — elevation premium, borda sutil, glow quente no hover === */
+.product-card {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  background: #1d2021;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.05),
+    0 20px 40px -26px rgba(0, 0, 0, 0.65);
+  transition:
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.35s ease,
+    border-color 0.35s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(214, 168, 79, 0.32);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    0 30px 56px -24px rgba(0, 0, 0, 0.7),
+    0 18px 36px -22px rgba(214, 168, 79, 0.28);
+}
+
+.product-card--sold {
+  opacity: 0.72;
+}
+
+/* === Vitrine da foto — fundo "estúdio" único (sem duplicar a imagem borrada) === */
+.product-thumb-frame {
   background:
-    radial-gradient(circle at 50% 35%, rgba(255, 214, 10, 0.06) 0%, transparent 60%),
-    linear-gradient(180deg, #161616 0%, #0b0b0b 100%);
+    radial-gradient(120% 80% at 50% 0%, rgba(214, 168, 79, 0.1) 0%, transparent 60%),
+    linear-gradient(180deg, #1c1c1c 0%, #101010 100%);
 }
 
 .product-thumb-fg {
-  filter: drop-shadow(0 14px 18px rgba(0, 0, 0, 0.55))
-    drop-shadow(0 4px 6px rgba(0, 0, 0, 0.4));
+  filter: drop-shadow(0 18px 20px rgba(0, 0, 0, 0.5)) drop-shadow(0 4px 8px rgba(0, 0, 0, 0.4));
 }
 
-.badge-test-pulse {
-  animation: badge-test-pulse 3s ease-in-out infinite;
-  will-change: transform;
+/* Sombra de "piso" sob o produto — dá profundidade mesmo em fotos retrato/paisagem extremas */
+.product-thumb-floor {
+  position: absolute;
+  left: 50%;
+  bottom: 9%;
+  width: 56%;
+  height: 10%;
+  transform: translateX(-50%);
+  background: radial-gradient(closest-side, rgba(0, 0, 0, 0.5), transparent 75%);
+  filter: blur(3px);
+  z-index: 1;
+  pointer-events: none;
 }
-@keyframes badge-test-pulse {
-  0%, 100% { transform: scale(1); }
-  50%      { transform: scale(1.02); }
+
+/* Vinheta interna sutil — unifica o enquadramento e separa do conteúdo abaixo */
+.product-thumb-vignette {
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.04),
+    inset 0 -46px 54px -34px rgba(0, 0, 0, 0.55);
 }
+
+/* Selo de destaque (DESTAQUE / NEGOCIÁVEL) — chip dourado premium */
+.product-ribbon {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.35rem 0.65rem;
+  border-radius: 9999px;
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: #241c05;
+  background: linear-gradient(135deg, #ffe8a3 0%, #d6a84f 55%, #b9812f 100%);
+  box-shadow:
+    0 8px 18px -6px rgba(214, 168, 79, 0.65),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+/* Bloco de preço — leve realce dourado, sem competir com o CTA */
+.price-box {
+  padding: 0.85rem 1rem;
+  border-radius: 12px;
+  border: 1px solid rgba(214, 168, 79, 0.25);
+  background: linear-gradient(180deg, rgba(214, 168, 79, 0.09) 0%, rgba(214, 168, 79, 0.02) 100%);
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .badge-test-pulse { animation: none; }
+  .product-card,
+  .product-thumb-fg {
+    transition: none !important;
+  }
 }
 </style>

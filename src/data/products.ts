@@ -6,7 +6,7 @@ export const products: Product[] = [
     name: 'Char Broiler Profissional Croydon CCP3 - 75 cm a Gás',
     description:
       'Char Broiler profissional 75 cm com 3 queimadores independentes, grelhas em ferro fundido e estrutura em aço inox. Ideal para hamburguerias, lanchonetes e churrascos profissionais.',
-    price: 2000,
+    price: 2100,
     category: 'cozinha',
     image: '/equipamentos/chapa-lanche/download-1.jpg',
     gallery: [
@@ -39,7 +39,7 @@ export const products: Product[] = [
     name: 'Fritadeira Elétrica Industrial',
     description:
       'Fritadeira elétrica para batatas, salgados, porções e uso intenso em cozinha comercial. Aquecimento rápido e cuba resistente.',
-    price: 0,
+    price: 1200,
     priceLabel: 'A consultar',
     category: 'cozinha',
     image: '/equipamentos/fritadeira-eletrica/foto-1.jpg',
@@ -70,7 +70,7 @@ export const products: Product[] = [
     name: 'Estufa de Batata Frita',
     description:
       'Estufa para manter batatas fritas e porções aquecidas e crocantes durante o atendimento. Essencial para o ritmo de uma hamburgueria.',
-    price: 0,
+    price: 1250,
     priceLabel: 'A consultar',
     category: 'cozinha',
     image: '/equipamentos/estufa-batata/foto-1.jpg',
@@ -97,7 +97,7 @@ export const products: Product[] = [
     name: 'Pia Inox para Lanchonete',
     description:
       'Pia em inox ideal para cozinha profissional, higienização e preparo de alimentos. Material resistente e fácil de limpar.',
-    price: 0,
+    price: 550,
     priceLabel: 'A consultar',
     category: 'cozinha',
     image: '/equipamentos/pia-lanche/foto-1.jpg',
@@ -122,7 +122,7 @@ export const products: Product[] = [
     name: 'Mesa / Suporte de Balcão de Atendimento',
     description:
       'Mesa e suporte de balcão para atendimento ao cliente, caixa ou apoio operacional. Estrutura firme com bom espaço para uso comercial.',
-    price: 0,
+    price: 600,
     priceLabel: 'A consultar',
     category: 'atendimento',
     image: '/equipamentos/mesa-balcao/foto-1.jpg',
@@ -151,7 +151,7 @@ export const products: Product[] = [
     name: 'Geladeira Consul',
     description:
       'Geladeira Consul em bom estado de uso, ideal para armazenamento de bebidas, insumos e ingredientes em lanchonete ou hamburgueria.',
-    price: 0,
+    price: 650,
     priceLabel: 'A consultar',
     category: 'refrigeracao',
     image: '/equipamentos/geladeira-consul/foto-1.png',
@@ -188,7 +188,7 @@ export const products: Product[] = [
       'Pronta para uso',
     ],
     condition: 'Usada em bom estado',
-    status: 'disponivel',
+    status: 'vendido',
     hasRealPhotos: true,
   },
   {
@@ -196,7 +196,7 @@ export const products: Product[] = [
     name: 'Casinha de Gás (Abrigo para Botijão)',
     description:
       'Estrutura segura para abrigo do botijão de gás (casinha de gás), atendendo às boas práticas de instalação em estabelecimento comercial.',
-    price: 0,
+    price: 450,
     priceLabel: 'A consultar',
     category: 'utensilios',
     image: '/equipamentos/casinha-gas/foto-1.jpg',

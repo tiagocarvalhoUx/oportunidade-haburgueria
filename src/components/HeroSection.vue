@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { Camera, Wrench, Handshake, MapPin, ShoppingBag, Flame } from 'lucide-vue-next';
 import WhatsAppButton from './WhatsAppButton.vue';
-import heroKitchenView from '../image/logo/hero-kitchen_view.png';
+import heroKitchenView from '../image/logo/hero-kitchen_view.webp';
 
 defineEmits<{
   (e: 'viewCatalog'): void;
@@ -114,7 +114,7 @@ const trustPoints = [
             <div class="absolute bottom-4 left-4 right-4 flex items-center gap-2 rounded-xl border border-cheese/25 bg-coal/88 px-3 py-2 backdrop-blur">
               <span class="og-logo-flip-hover hero-logo-main shrink-0">
                 <img
-                  src="/logo.png"
+                  src="/logo-mark.png"
                   alt="Oportunidade Hamburgueria"
                   class="h-11 w-auto object-contain"
                   width="44"

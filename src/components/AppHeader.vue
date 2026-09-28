@@ -39,7 +39,7 @@ function scrollTo(id: string) {
       >
         <span class="og-logo-flip-hover shrink-0">
           <img
-            src="/logo.png"
+            src="/logo-mark.png"
             alt=""
             class="h-11 w-auto object-contain sm:h-[52px] lg:h-14"
             width="48"

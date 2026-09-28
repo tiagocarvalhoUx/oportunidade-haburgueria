@@ -1,11 +1,14 @@
-const CACHE_NAME = 'oportunidade-hamburgueria-v3';
+const CACHE_NAME = 'oportunidade-hamburgueria-v4';
 
 const APP_SHELL = [
   '/',
   '/index.html',
   '/manifest.webmanifest',
-  '/logo.png',
+  '/logo-mark.png',
   '/favicon.svg',
+  '/icons/icon-192.png',
+  '/icons/icon-512.png',
+  '/icons/apple-touch-icon.png',
   '/fonts/Onest-VariableFont_wght.ttf',
 ];
 
